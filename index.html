@@ -6,7 +6,7 @@
 <form id="form"><label>Username</label><input id="u" placeholder="Username" required><label>Password</label><input id="p" type="password" placeholder="Password" required><div id="err" class="err">Username atau password tidak sesuai.</div><button>MASUK KE PORTAL</button></form></div></section>
 <section id="portal" class="screen hidden"><div class="status"><div class="head"><small>PORTAL YAYASAN OKI</small><h2>Status Mitra</h2></div><div class="body">
 <div class="alert"><strong>STATUS PEMUTUSAN MITRA: PENDING</strong>Harap lakukan pembayaran ulang kepada admin untuk proses konfirmasi status mitra.</div>
-<div class="pay">Pembayaran melalui DANA<br><b>089520623922</b><br>Admin: <strong>Nisa</strong><br><span class="pending">PENDING</span></div>
+<div class="pay">Nominal pembayaran<br><b>Rp500.000</b><br>Pembayaran melalui DANA<br><b>089520623922</b><br>Admin: <strong>Nisa</strong><br><span class="pending">PENDING</span></div>
 <label for="proof" style="margin-top:25px">Bukti Transfer *</label><input id="proof" type="file" accept="image/*,application/pdf" required><div class="note">Bukti transfer wajib dipilih sebelum konfirmasi.</div>
 <div class="actions"><button class="wa" id="send">KONFIRMASI VIA WHATSAPP</button><button class="logout" id="out">KELUAR</button></div>
 </div></div></section>
@@ -14,5 +14,5 @@
 const WA="6289520623922";
 document.getElementById("form").onsubmit=e=>{e.preventDefault();let u=document.getElementById("u").value.trim().toLowerCase(),p=document.getElementById("p").value;if(u==="yayasan oki"&&p==="nia12321"){login.classList.add("hidden");portal.classList.remove("hidden")}else err.style.display="block"};
 document.getElementById("out").onclick=()=>{portal.classList.add("hidden");login.classList.remove("hidden");p.value=""};
-document.getElementById("send").onclick=()=>{if(!proof.files.length){proof.reportValidity();return}let m=`Halo Admin Nisa, saya ingin konfirmasi status mitra Yayasan OKI.\n\nStatus: PEMUTUSAN MITRA - PENDING\nNomor DANA: 089520623922\nBukti transfer: ${proof.files[0].name}`;open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank")};
+document.getElementById("send").onclick=()=>{if(!proof.files.length){proof.reportValidity();return}let m=`Halo Admin Nisa, saya ingin konfirmasi status mitra Yayasan OKI.\n\nStatus: PEMUTUSAN MITRA - PENDING\nNominal: Rp500.000\nNomor DANA: 089520623922\nBukti transfer: ${proof.files[0].name}`;open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank")};
 </script></body></html>
