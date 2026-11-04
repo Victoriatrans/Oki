@@ -347,12 +347,22 @@ footer li{margin:7px 0}
      <button class="submit-btn" type="submit">CAIRKAN</button>
     </form>
    </div>
-   <div id="payoutStatus" role="status" aria-live="polite" style="display:none;margin-top:22px;padding:26px 20px;border:2px solid #86efac;border-radius:18px;background:#f0fdf4;text-align:center">
-    <div style="font-size:42px;margin-bottom:8px" aria-hidden="true">✓</div>
-    <h2 style="font-size:clamp(24px,5vw,34px);line-height:1.2;color:#166534;margin-bottom:12px">Pengajuan pencairan telah diterima</h2>
-    <p style="font-size:18px;font-weight:800;color:#92400e;margin-bottom:8px">Proses menunggu approval (Wait..aprove)</p>
-    <p style="color:#334155">Silakan cek rekening secara berkala untuk mengetahui apakah dana sudah masuk.</p>
-    <p style="margin-top:14px;padding:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;color:#9a3412;font-size:13px;font-weight:700">Pemberitahuan: ini hanya konfirmasi bahwa formulir pengajuan diterima. Dana belum dinyatakan cair atau ditransfer. Status transfer harus diverifikasi melalui bank atau pihak resmi.</p>
+   <div id="payoutStatus" role="status" aria-live="polite" style="display:none;margin-top:22px;padding:26px 20px;border:2px solid #86efac;border-radius:18px;background:#f0fdf4">
+    <div style="font-size:25px;font-weight:900;color:#166534;margin-bottom:18px">Admin 1 MELLYSA S.H. ✅</div>
+    <div class="checkbox" style="justify-content:center;margin:18px 0">
+     <input type="checkbox" id="payoutTerms" required style="width:20px;height:20px">
+     <label for="payoutTerms">Saya menyatakan telah membaca dan menyetujui syarat dan ketentuan.</label>
+    </div>
+    <button class="submit-btn" type="button" id="payoutApprove">SETUJUI</button>
+    <div id="payoutApproved" style="display:none;margin-top:22px;padding:26px 16px;border:3px solid #16a34a;border-radius:16px;background:#fff;text-align:center">
+     <h2 style="font-size:clamp(25px,5vw,36px);line-height:1.2;color:#166534;margin-bottom:14px">PENGAJUAN TELAH DISETUJUI</h2>
+     <p style="font-size:19px;font-weight:900;color:#166534;margin-bottom:16px">CEK REKENING BERKALA 1x24 JAM</p>
+     <p style="color:#334155;margin-bottom:18px">Jika dana sudah masuk, kirim bukti mutasi rekening melalui lampiran di bawah.</p>
+     <div style="text-align:left">
+      <label for="mutationProof">Lampiran</label>
+      <input id="mutationProof" type="file" accept="image/*,.pdf">
+     </div>
+    </div>
    </div>
   </div>
  </div>
@@ -713,6 +723,17 @@ document.getElementById("payoutForm").addEventListener("submit", function(e){
   }
   document.getElementById("payoutFormWrap").style.display = "none";
   document.getElementById("payoutStatus").style.display = "block";
+});
+
+document.getElementById("payoutApprove").addEventListener("click", function(){
+  const agreed = document.getElementById("payoutTerms").checked;
+  if(!agreed){
+    alert("Centang persetujuan syarat dan ketentuan terlebih dahulu.");
+    return;
+  }
+  document.getElementById("payoutApproved").style.display = "block";
+  this.style.display = "none";
+  document.getElementById("payoutTerms").disabled = true;
 });
 
 document.getElementById("payoutAccount").addEventListener("input", function(){
