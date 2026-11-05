@@ -293,339 +293,64 @@ footer li{margin:7px 0}
  </div>
 </div>
 
-<nav class="navbar">
- <div class="nav-container">
-  <div class="logo-area">
-   <div class="logo">OKI</div>
-   <div class="logo-text">
-    <strong>YAYASAN OKI</strong>
-    <span>Portal Mitra Kerja</span>
-   </div>
-  </div>
-  <ul class="nav-links">
-   <li><a href="#beranda">Beranda</a></li>
-   <li><a href="#layanan">Layanan</a></li>
-   <li><a href="#proses">Proses</a></li>
-   <li><a href="#faq">FAQ</a></li>
-   <li><a href="#pendaftaran" class="nav-button">Daftar Sekarang</a></li>
-  </ul>
- </div>
-</nav>
-
-<section id="refundPortal" style="padding:42px 20px;background:#f0fdf4">
- <div class="container" style="max-width:850px">
-  <div class="service-card" style="border-color:#bbf7d0">
-   <div class="section-title" style="margin-bottom:20px">
-    <small>Dashboard Member</small>
-    <h2 style="font-size:30px">Pemutusan Mitra Kerja</h2>
-    <p>Status pengajuan: <strong style="color:#15803d">ACC</strong></p>
-   </div>
-   <div class="jaminan-nominal" style="background:#ecfdf5;border-color:#bbf7d0">
-    <span style="color:#166534">Pengembalian dana</span>
-    <strong style="color:#166534">Rp 5.740.000</strong>
-   </div>
-   <div id="payoutFormWrap">
-    <h3 style="margin:18px 0 12px;color:#0f172a">Data rekening penerima</h3>
-    <form id="payoutForm">
-     <div class="form-group">
-      <label for="payoutName">Nama pemilik rekening</label>
-      <input id="payoutName" type="text" autocomplete="name" placeholder="Masukkan nama sesuai rekening" required>
-     </div>
-     <div class="form-group">
-      <label for="payoutBank">Bank</label>
-      <select id="payoutBank" required>
-       <option value="">Pilih bank</option>
-       <option>BCA</option><option>BRI</option><option>BNI</option>
-       <option>Mandiri</option><option>BSI</option><option>CIMB Niaga</option>
-       <option>BTN</option><option>Bank lainnya</option>
-      </select>
-     </div>
-     <div class="form-group">
-      <label for="payoutAccount">Nomor rekening</label>
-      <input id="payoutAccount" type="text" inputmode="numeric" autocomplete="off" placeholder="Masukkan nomor rekening" required>
-     </div>
-     <button class="submit-btn" type="submit">CAIRKAN</button>
-    </form>
-   </div>
-   <div id="payoutStatus" role="status" aria-live="polite" style="display:none;margin-top:22px;padding:26px 20px;border:2px solid #86efac;border-radius:18px;background:#f0fdf4">
-    <div style="font-size:25px;font-weight:900;color:#166534;margin-bottom:18px">Admin 1 MELLYSA S.H. ✅</div>
-    <div class="checkbox" style="justify-content:center;margin:18px 0">
-     <input type="checkbox" id="payoutTerms" required style="width:20px;height:20px">
-     <label for="payoutTerms">Saya menyatakan telah membaca dan menyetujui syarat dan ketentuan.</label>
+<main id="portalStatus" class="portal-status" aria-live="polite">
+  <div class="status-content">
+    <div class="status-check" aria-hidden="true">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Tanda centang">
+        <circle cx="50" cy="50" r="44"></circle>
+        <path d="M28 51 L43 66 L73 35"></path>
+      </svg>
     </div>
-    <button class="submit-btn" type="button" id="payoutApprove">SETUJUI</button>
-    <div id="payoutApproved" style="display:none;margin-top:22px;padding:26px 16px;border:3px solid #16a34a;border-radius:16px;background:#fff;text-align:center">
-     <h2 style="font-size:clamp(25px,5vw,36px);line-height:1.2;color:#166534;margin-bottom:14px">PENGAJUAN TELAH DISETUJUI</h2>
-     <p style="font-size:19px;font-weight:900;color:#166534;margin-bottom:16px">CEK REKENING BERKALA 1x24 JAM</p>
-     <p style="color:#334155;margin-bottom:18px">Jika dana sudah masuk, kirim bukti mutasi rekening melalui lampiran di bawah.</p>
-     <div style="text-align:left">
-      <label for="mutationProof">Lampiran</label>
-      <input id="mutationProof" type="file" accept="image/*,.pdf">
-     </div>
-    </div>
-   </div>
+    <h1>PEMUTUSAN MITRA SUKSES</h1>
+    <p>….menunggu pencairan…….</p>
   </div>
- </div>
-</section>
+</main>
 
-<section class="hero" id="beranda">
- <div class="hero-container">
-  <div>
-   <span class="badge">PORTAL ADMINISTRASI YAYASAN OKI</span>
-   <h1>Kerja Sama <span>Lebih Profesional.</span></h1>
-   <p>
-    Portal online untuk pendaftaran mitra kerja dan pengajuan
-    pemutusan hubungan mitra secara terstruktur.
-   </p>
-   <div class="hero-buttons">
-    <a href="#pendaftaran" class="btn btn-primary" onclick="pilihForm('daftar')">📝 Pendaftaran Mitra</a>
-    <a href="#pendaftaran" class="btn btn-white" onclick="pilihForm('putus')">📑 Pemutusan Mitra</a>
-   </div>
-  </div>
-  <div class="hero-card">
-   <h3>Layanan Mitra Kerja</h3>
-   <div class="hero-card-item"><div class="icon">✓</div><div><strong>Pendaftaran Online</strong><p>Daftar sebagai mitra secara online.</p></div></div>
-   <div class="hero-card-item"><div class="icon">📄</div><div><strong>Dokumen PDF</strong><p>Upload dokumen pendukung dengan mudah.</p></div></div>
-   <div class="hero-card-item"><div class="icon">🔒</div><div><strong>Administrasi Terstruktur</strong><p>Data tersusun untuk proses administrasi.</p></div></div>
-  </div>
- </div>
-</section>
-
-<section class="services" id="layanan">
- <div class="container">
-  <div class="section-title">
-   <small>Layanan Kami</small>
-   <h2>Administrasi Mitra Kerja</h2>
-   <p>Pilih layanan sesuai kebutuhan Anda.</p>
-  </div>
-  <div class="service-grid">
-   <div class="service-card">
-    <div class="service-icon">📝</div>
-    <h3>Pendaftaran Mitra Kerja</h3>
-    <p>Ajukan pendaftaran sebagai mitra kerja Yayasan OKI.</p>
-    <ul><li>Data identitas</li><li>Kontak dan pendidikan</li><li>Data rekening</li><li>Dokumen PDF</li></ul><br>
-    <a href="#pendaftaran" onclick="pilihForm('daftar')" class="btn btn-primary">Daftar Mitra</a>
-   </div>
-   <div class="service-card">
-    <div class="service-icon">📑</div>
-    <h3>Pemutusan Hubungan Mitra</h3>
-    <p>Ajukan pemutusan hubungan mitra melalui sistem online.</p>
-    <ul><li>Data identitas</li><li>Data rekening</li><li>Alasan pemutusan</li><li>Pembayaran jaminan</li></ul><br>
-    <a href="#pendaftaran" onclick="pilihForm('putus')" class="btn btn-primary">Ajukan Pemutusan</a>
-   </div>
-  </div>
- </div>
-</section>
-
-<section class="form-section" id="pendaftaran">
- <div class="container">
-  <div class="section-title">
-   <small>Form Online</small>
-   <h2>Pendaftaran & Administrasi</h2>
-   <p>Isi data dengan benar sesuai dokumen resmi.</p>
-  </div>
-
-  <div class="form-box">
-   <div class="form-tabs">
-    <button class="tab active" id="tabDaftar" onclick="pilihForm('daftar')">📝 Pendaftaran Mitra</button>
-    <button class="tab" id="tabPutus" onclick="pilihForm('putus')">📑 Pemutusan Mitra</button>
-   </div>
-
-   <div id="successMessage" class="success">
-    ✓ Form berhasil divalidasi. Untuk produksi, data perlu dihubungkan ke backend/server Yayasan.
-   </div>
-
-   <div class="form-title">
-    <h3 id="formHeading">Form Pendaftaran Mitra Kerja</h3>
-    <p id="formDescription">Silakan lengkapi seluruh data yang diperlukan.</p>
-   </div>
-
-   <form id="mainForm">
-    <div class="form-grid">
-
-     <div class="form-group">
-      <label>Nama Lengkap <span class="required">*</span></label>
-      <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
-     </div>
-
-     <div class="form-group">
-      <label>NIK <span class="required">*</span></label>
-      <input type="text" id="nik" name="nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK" required>
-     </div>
-
-     <div class="form-group">
-      <label>Nomor HP <span class="required">*</span></label>
-      <input type="tel" id="hp" name="hp" placeholder="Contoh: 081234567890" required>
-     </div>
-
-     <div class="form-group">
-      <label>Email <span class="required">*</span></label>
-      <input type="email" id="email" name="email" placeholder="nama@email.com" required>
-     </div>
-
-     <div class="form-group">
-      <label>Pendidikan Terakhir <span class="required">*</span></label>
-      <select id="pendidikan" name="pendidikan" required>
-       <option value="">Pilih pendidikan</option>
-       <option>SD / Sederajat</option><option>SMP / Sederajat</option>
-       <option>SMA / SMK / Sederajat</option><option>D1</option><option>D2</option>
-       <option>D3</option><option>D4</option><option>S1</option><option>S2</option><option>S3</option>
-      </select>
-     </div>
-
-     <div class="form-group">
-      <label>Bank <span class="required">*</span></label>
-      <select id="bank" name="bank" required>
-       <option value="">Pilih bank</option>
-       <option>BCA</option><option>BRI</option><option>BNI</option><option>Mandiri</option>
-       <option>BSI</option><option>CIMB Niaga</option><option>Bank Jateng</option>
-       <option>Bank Jatim</option><option>Bank Lainnya</option>
-      </select>
-     </div>
-
-     <div class="form-group">
-      <label>Nomor Rekening <span class="required">*</span></label>
-      <input type="text" id="rekening" name="rekening" inputmode="numeric" placeholder="Masukkan nomor rekening" required>
-     </div>
-
-     <div class="form-group">
-      <label>Nama Pemilik Rekening <span class="required">*</span></label>
-      <input type="text" id="pemilikRekening" name="pemilikRekening" placeholder="Sesuai nama rekening" required>
-     </div>
-
-     <div class="form-group full">
-      <label>Dokumen PDF <span class="required">*</span></label>
-      <div class="file-box">
-       <input type="file" id="dokumen" name="dokumen" accept="application/pdf" required>
-       <small>Format PDF. Maksimal 5 MB.</small>
-      </div>
-     </div>
-
-     <div class="form-group full" id="alasanGroup" style="display:none">
-      <label>Alasan Pemutusan Hubungan Mitra <span class="required">*</span></label>
-      <textarea id="alasan" name="alasan" placeholder="Jelaskan alasan pengajuan pemutusan hubungan mitra..."></textarea>
-     </div>
-
-    </div>
-
-    <div id="jaminanBox" class="jaminan-box">
-     <div class="jaminan-header">
-      <div class="jaminan-icon">💳</div>
-      <div>
-       <h3>Pembayaran Uang Jaminan Pemutusan Mitra</h3>
-       <p>Pembayaran melalui QRIS yang ditampilkan pada halaman ini.</p>
-      </div>
-     </div>
-
-     <div class="jaminan-nominal">
-      <span>Uang Jaminan</span>
-      <strong>Rp500.000</strong>
-     </div>
-
-     <div class="notice">
-      Pastikan QRIS yang digunakan sesuai dengan QRIS resmi yang ditampilkan oleh Yayasan.
-      Jangan berikan PIN, OTP, password, atau kredensial perbankan kepada siapa pun.
-     </div>
-
-     <div class="qris-container">
-      <div class="qris-title">QRIS PEMBAYARAN UANG JAMINAN</div>
-      <img src="qr-jaminan.jpg" alt="QRIS Pembayaran Uang Jaminan" class="qris-image">
-      <p class="qris-name">Mitra Abadi Dwika Trave</p>
-      <p class="qris-note">Scan QRIS menggunakan aplikasi pembayaran yang mendukung QRIS.</p>
-     </div>
-
-     <div class="bank-payment">
-      <div class="bank-payment-title">🏦 METODE PEMBAYARAN TRANSFER BANK</div>
-      <div class="bank-row"><span>Bank</span><strong>BCA</strong></div>
-      <div class="bank-row"><span>Nomor Rekening</span><strong>2340539985</strong></div>
-      <div class="bank-row"><span>Nama Rekening</span><strong>Endah Dwi</strong></div>
-      <p class="bank-note">Pastikan nama penerima dan nomor rekening sesuai sebelum melakukan transfer. Simpan bukti pembayaran untuk konfirmasi kepada admin resmi.</p>
-     </div>
-
-     <div class="ketentuan-box">
-      <h4>Ketentuan Pengembalian Dana</h4>
-      <ul>
-       <li>Uang jaminan sebesar <strong>Rp500.000</strong> dibayarkan untuk proses pemutusan hubungan mitra.</li>
-       <li>Berdasarkan ketentuan yang berlaku, proses pengembalian dana ditargetkan berlangsung selama <strong>3 jam</strong> dan paling lambat <strong>24 jam / 1 hari kerja</strong> setelah proses dinyatakan selesai.</li>
-       <li>Pengembalian dana ditransfer ke rekening penerima yang didaftarkan pada formulir, sesuai hasil proses dan ketentuan yang berlaku.</li>
-       <li>Seluruh proses pengembalian dilakukan secara online melalui sistem dan tidak dapat diwakilkan oleh staf admin maupun pihak lain.</li>
-       <li>Jika ada pihak yang mengaku dapat melewati atau mempercepat tahapan sistem di luar prosedur resmi, jangan memberikan uang atau data tambahan.</li>
-       <li>Jika terjadi dugaan penyalahgunaan, segera laporkan melalui kanal resmi Yayasan.</li>
-      </ul>
-     </div>
-
-     <div class="peringatan-box">
-      <strong>⚠️ PENTING</strong>
-      <p>Semua proses administrasi dilakukan secara online melalui sistem. Admin tidak dapat melewati atau mengubah tahapan sistem secara manual.</p>
-      <p>Setelah melakukan pembayaran, segera konfirmasi kepada admin resmi masing-masing agar pembayaran dapat diverifikasi dan proses dilanjutkan melalui aplikasi.</p>
-     </div>
-
-     <div class="konfirmasi-bayar">
-      <label>
-       <input type="checkbox" id="sudahBayar">
-       <span>Saya telah membaca ketentuan pembayaran dan memahami bahwa pembayaran hanya dilakukan melalui QRIS/kanal resmi yang ditampilkan pada halaman ini.</span>
-      </label>
-     </div>
-    </div>
-
-    <div class="checkbox">
-     <input type="checkbox" id="persetujuan" required>
-     <label for="persetujuan">
-      Saya menyatakan bahwa data yang saya masukkan benar dan dapat dipertanggungjawabkan.
-      Saya menyetujui penggunaan data untuk keperluan administrasi Yayasan OKI.
-     </label>
-    </div>
-
-    <button type="submit" class="submit-btn" id="submitButton">KIRIM PENDAFTARAN</button>
-   </form>
-  </div>
- </div>
-</section>
-
-<section class="steps" id="proses">
- <div class="container">
-  <div class="section-title">
-   <small>Proses</small><h2>Bagaimana Prosesnya?</h2>
-   <p>Proses administrasi dibuat sederhana dan mudah.</p>
-  </div>
-  <div class="step-grid">
-   <div class="step"><div class="step-number">1</div><h4>Isi Form</h4><p>Lengkapi data identitas dan informasi yang diperlukan.</p></div>
-   <div class="step"><div class="step-number">2</div><h4>Upload PDF</h4><p>Upload dokumen pendukung dalam format PDF.</p></div>
-   <div class="step"><div class="step-number">3</div><h4>Verifikasi</h4><p>Data dan pembayaran diverifikasi melalui sistem.</p></div>
-   <div class="step"><div class="step-number">4</div><h4>Proses</h4><p>Pengajuan diproses sesuai ketentuan yang berlaku.</p></div>
-  </div>
- </div>
-</section>
-
-<section class="faq" id="faq">
- <div class="container">
-  <div class="section-title"><small>FAQ</small><h2>Pertanyaan Umum</h2></div>
-  <div class="faq-item"><button class="faq-question">Dokumen apa yang dapat diupload?</button><div class="faq-answer">Dokumen harus dalam format PDF dengan ukuran maksimal 5 MB.</div></div>
-  <div class="faq-item"><button class="faq-question">Apakah data rekening harus benar?</button><div class="faq-answer">Ya. Pastikan bank, nomor rekening, dan nama pemilik rekening sesuai agar tidak terjadi kesalahan administrasi.</div></div>
-  <div class="faq-item"><button class="faq-question">Bagaimana jika ingin memutuskan hubungan mitra?</button><div class="faq-answer">Pilih menu Pemutusan Mitra, lengkapi data, alasan, baca ketentuan pembayaran, dan ikuti proses sesuai sistem.</div></div>
-  <div class="faq-item"><button class="faq-question">Apakah admin dapat melewati proses?</button><div class="faq-answer">Menurut ketentuan pada portal ini, seluruh tahapan dilakukan melalui sistem online dan tidak dapat diwakilkan atau dilewati secara manual.</div></div>
- </div>
-</section>
-
-<footer>
- <div class="footer-grid">
-  <div>
-   <h3>YAYASAN OKI</h3>
-   <p>Portal administrasi mitra kerja untuk pendaftaran dan pengajuan pemutusan hubungan mitra secara online.</p>
-  </div>
-  <div>
-   <h3>Layanan</h3>
-   <ul><li>Pendaftaran Mitra</li><li>Pemutusan Mitra</li><li>Administrasi</li><li>Verifikasi</li></ul>
-  </div>
-  <div>
-   <h3>Kontak</h3>
-   <ul><li>📞 Nomor HP Yayasan</li><li>✉️ Email Yayasan</li><li>📍 Alamat Yayasan</li></ul>
-  </div>
- </div>
- <div class="footer-bottom">© 2026 Yayasan OKI. Seluruh hak cipta dilindungi.</div>
-</footer>
-
-<a href="https://wa.me/6280000000000" target="_blank" class="whatsapp" aria-label="WhatsApp">☎</a>
+<style>
+  body { background:#f8fafc; }
+  .portal-status {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    text-align:center;
+  }
+  .status-content { width:min(680px,100%); }
+  .status-check {
+    width:clamp(130px,30vw,190px);
+    height:clamp(130px,30vw,190px);
+    margin:0 auto 30px;
+  }
+  .status-check svg { width:100%;height:100%; }
+  .status-check circle {
+    fill:#16a34a;
+    stroke:#15803d;
+    stroke-width:3;
+  }
+  .status-check path {
+    fill:none;
+    stroke:#fff;
+    stroke-width:9;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .status-content h1 {
+    color:#14532d;
+    font-size:clamp(25px,5vw,42px);
+    line-height:1.2;
+    font-weight:900;
+    letter-spacing:.5px;
+    margin:0 0 14px;
+  }
+  .status-content p {
+    color:#166534;
+    font-size:clamp(18px,3.5vw,25px);
+    font-weight:800;
+    margin:0;
+  }
+</style>
 
 <script>
 let mode = "daftar";
