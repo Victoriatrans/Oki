@@ -1,501 +1,95 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yayasan OKI | Pendaftaran & Pemutusan Mitra</title>
-<meta name="description" content="Portal administrasi Yayasan OKI untuk pendaftaran dan pemutusan hubungan mitra kerja.">
-
-<style>
-:root{
- --primary:#14532d;
- --primary2:#166534;
- --green:#22c55e;
- --dark:#0f172a;
- --text:#334155;
- --muted:#64748b;
- --light:#f0fdf4;
- --border:#dbe4df;
- --white:#fff;
- --orange:#c2410c;
- --orangebg:#fff7ed;
- --danger:#991b1b;
- --dangerbg:#fef2f2;
- --shadow:0 15px 45px rgba(15,23,42,.10);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
- font-family:Inter,Segoe UI,Arial,sans-serif;
- color:var(--text);background:#f8fafc;line-height:1.6;
-}
-.navbar{
- position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
- backdrop-filter:blur(14px);border-bottom:1px solid #e2e8f0;
-}
-.nav-container{
- max-width:1200px;margin:auto;padding:14px 22px;display:flex;
- align-items:center;justify-content:space-between;
-}
-.logo-area{display:flex;align-items:center;gap:12px}
-.logo{
- width:50px;height:50px;border-radius:50%;
- background:linear-gradient(135deg,var(--primary),var(--green));
- color:white;display:flex;align-items:center;justify-content:center;
- font-weight:900;font-size:17px;
-}
-.logo-text strong{display:block;color:var(--primary);font-size:18px}
-.logo-text span{font-size:12px;color:var(--muted)}
-.nav-links{display:flex;gap:22px;list-style:none}
-.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:14px}
-.nav-links a:hover{color:var(--primary)}
-.nav-button{background:var(--primary);color:white!important;padding:10px 17px;border-radius:30px}
-
-.hero{
- min-height:570px;color:white;overflow:hidden;position:relative;
- background:linear-gradient(120deg,rgba(15,75,42,.97),rgba(22,101,52,.85)),
- radial-gradient(circle at top right,#4ade80,transparent 42%);
-}
-.hero-container{
- max-width:1200px;margin:auto;padding:85px 22px;display:grid;
- grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;
-}
-.badge{
- display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.3);
- background:rgba(255,255,255,.1);border-radius:30px;font-size:12px;
- margin-bottom:20px;letter-spacing:.5px;
-}
-.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.05;margin-bottom:22px}
-.hero h1 span{color:#86efac}
-.hero p{font-size:18px;max-width:650px;color:#dcfce7;margin-bottom:30px}
-.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
-.btn{
- border:0;cursor:pointer;padding:13px 21px;border-radius:12px;
- font-weight:800;text-decoration:none;display:inline-flex;
- align-items:center;justify-content:center;transition:.2s;
-}
-.btn:hover{transform:translateY(-2px)}
-.btn-primary{background:#22c55e;color:white}
-.btn-white{background:white;color:var(--primary)}
-.hero-card{
- background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
- padding:27px;border-radius:24px;backdrop-filter:blur(14px);
-}
-.hero-card h3{margin-bottom:17px}
-.hero-card-item{display:flex;gap:12px;margin:16px 0}
-.icon{
- width:40px;height:40px;flex:none;border-radius:10px;
- background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;
-}
-
-section{padding:78px 20px}
-.container{max-width:1100px;margin:auto}
-.section-title{text-align:center;margin-bottom:42px}
-.section-title small{color:var(--primary2);font-weight:900;text-transform:uppercase;letter-spacing:2px}
-.section-title h2{color:var(--dark);font-size:38px;margin:7px 0}
-.section-title p{color:var(--muted)}
-
-.services{background:white}
-.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
-.service-card{
- padding:33px;border:1px solid var(--border);border-radius:22px;
- background:white;box-shadow:var(--shadow);transition:.25s;
-}
-.service-card:hover{transform:translateY(-4px)}
-.service-icon{
- width:60px;height:60px;border-radius:17px;background:var(--light);
- color:var(--primary);display:flex;align-items:center;justify-content:center;
- font-size:28px;margin-bottom:18px;
-}
-.service-card h3{color:var(--dark);margin-bottom:9px}
-.service-card p{color:var(--muted);margin-bottom:18px}
-.service-card ul{padding-left:20px}
-
-.form-section{background:linear-gradient(rgba(240,253,244,.93),rgba(240,253,244,.93))}
-.form-box{
- max-width:880px;margin:auto;background:white;padding:38px;
- border-radius:25px;box-shadow:var(--shadow);
-}
-.form-tabs{
- display:grid;grid-template-columns:1fr 1fr;background:#f1f5f9;
- padding:5px;border-radius:12px;margin-bottom:28px;
-}
-.tab{
- border:0;background:transparent;padding:13px;border-radius:9px;
- cursor:pointer;font-weight:800;color:var(--muted);
-}
-.tab.active{background:var(--primary);color:white}
-.form-title{margin-bottom:24px}
-.form-title h3{color:var(--dark);font-size:25px}
-.form-title p{color:var(--muted);font-size:14px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.form-group{margin-bottom:18px}
-.form-group.full{grid-column:1/-1}
-label{display:block;margin-bottom:7px;font-weight:800;color:#1e293b;font-size:14px}
-.required{color:#dc2626}
-input,select,textarea{
- width:100%;border:1px solid var(--border);border-radius:10px;padding:13px 14px;
- font-size:15px;outline:none;background:#fff;transition:.2s;
-}
-input:focus,select:focus,textarea:focus{
- border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.12)
-}
-textarea{min-height:125px;resize:vertical}
-.file-box{border:2px dashed #bbf7d0;background:#f0fdf4;padding:20px;border-radius:12px}
-.file-box small{display:block;margin-top:6px;color:var(--muted)}
-.checkbox{display:flex;gap:10px;align-items:flex-start;margin:20px 0}
-.checkbox input{width:auto;margin-top:5px}
-.checkbox label{font-weight:500;margin:0;font-size:13px}
-.submit-btn{
- width:100%;background:var(--primary);color:white;padding:15px;border-radius:11px;
- border:0;font-size:16px;font-weight:900;cursor:pointer;
-}
-.submit-btn:hover{background:var(--primary2)}
-.success{
- display:none;padding:18px;background:#dcfce7;border:1px solid #86efac;
- color:#166534;border-radius:12px;margin-bottom:20px;font-weight:700;
-}
-
-.jaminan-box{
- display:none;margin:25px 0;padding:24px;border-radius:20px;
- background:#fff;border:1px solid #fed7aa;box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-.jaminan-header{display:flex;gap:14px;align-items:center;margin-bottom:19px}
-.jaminan-icon{
- width:52px;height:52px;border-radius:14px;background:var(--orangebg);
- display:flex;align-items:center;justify-content:center;font-size:25px;
-}
-.jaminan-header h3{color:#9a3412;margin:0 0 3px;font-size:19px}
-.jaminan-header p{margin:0;color:#78716c;font-size:13px}
-.jaminan-nominal{
- background:var(--orangebg);border:1px solid #fed7aa;border-radius:14px;
- padding:17px;display:flex;justify-content:space-between;align-items:center;margin-bottom:23px;
-}
-.jaminan-nominal span{color:#7c2d12;font-weight:700}
-.jaminan-nominal strong{font-size:25px;color:var(--orange)}
-.qris-container{
- text-align:center;padding:23px 13px;border:1px solid #e2e8f0;
- border-radius:18px;background:#fafafa;margin-bottom:19px;
-}
-.qris-title{font-weight:900;color:#0f172a;margin-bottom:14px;letter-spacing:1px}
-.qris-image{width:100%;max-width:430px;display:block;margin:auto;border-radius:10px}
-.qris-name{margin:13px 0 3px;font-size:17px;font-weight:900;color:#14532d}
-.qris-note{color:#64748b;font-size:13px}
-.ketentuan-box{
- padding:19px;border-radius:15px;background:#f8fafc;border:1px solid #e2e8f0;
-}
-.ketentuan-box h4{margin-bottom:10px;color:#0f172a}
-.ketentuan-box ul{padding-left:20px}
-.ketentuan-box li{margin:8px 0;font-size:13px;color:#475569}
-.peringatan-box{
- margin-top:17px;padding:17px;border-radius:14px;background:var(--dangerbg);
- border:1px solid #fecaca;color:var(--danger)
-}
-.peringatan-box strong{display:block;margin-bottom:7px}
-.peringatan-box p{font-size:13px;line-height:1.7;margin:5px 0}
-.konfirmasi-bayar{
- margin-top:18px;padding:15px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;
-}
-.konfirmasi-bayar label{display:flex;gap:10px;align-items:flex-start;font-size:13px;font-weight:700;color:#166534}
-.konfirmasi-bayar input{width:auto;margin-top:3px}
-
-.steps{background:white}
-.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.step{text-align:center;padding:20px}
-.step-number{
- width:55px;height:55px;margin:0 auto 15px;border-radius:50%;
- background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;
- font-size:20px;font-weight:900;
-}
-.step h4{color:var(--dark);margin-bottom:6px}
-.step p{color:var(--muted);font-size:13px}
-
-.faq{background:#f8fafc}
-.faq-item{background:white;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:11px;overflow:hidden}
-.faq-question{
- width:100%;text-align:left;background:white;border:0;padding:17px 20px;
- font-weight:800;color:var(--dark);cursor:pointer;
-}
-.faq-answer{display:none;padding:0 20px 17px;color:var(--muted)}
-.faq-item.open .faq-answer{display:block}
-
-footer{background:#0f172a;color:white;padding:52px 20px 24px}
-.footer-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:38px}
-footer h3{margin-bottom:13px}
-footer p,footer li{color:#94a3b8;font-size:14px}
-footer ul{list-style:none}
-footer li{margin:7px 0}
-.footer-bottom{
- max-width:1100px;margin:32px auto 0;padding-top:19px;border-top:1px solid #1e293b;
- text-align:center;color:#64748b;font-size:13px
-}
-.whatsapp{
- position:fixed;right:20px;bottom:20px;width:57px;height:57px;border-radius:50%;
- background:#25D366;color:white;display:flex;align-items:center;justify-content:center;
- font-size:25px;text-decoration:none;box-shadow:0 8px 25px rgba(0,0,0,.2);z-index:999;
-}
-.notice{
- padding:12px 15px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;
- font-size:12px;color:#64748b;margin-bottom:18px;
-}
-
-@media(max-width:800px){
- .nav-links{display:none}
- .hero-container{grid-template-columns:1fr;padding:65px 20px}
- .hero-card{display:none}
- .service-grid{grid-template-columns:1fr}
- .form-grid{grid-template-columns:1fr}
- .form-group.full{grid-column:auto}
- .step-grid{grid-template-columns:1fr 1fr}
- .footer-grid{grid-template-columns:1fr}
- .form-box{padding:24px 18px}
- .section-title h2{font-size:30px}
-}
-@media(max-width:480px){
- .step-grid{grid-template-columns:1fr}
- .hero h1{font-size:42px}
- .hero-buttons .btn{width:100%}
- .jaminan-nominal{display:block}
- .jaminan-nominal strong{display:block;margin-top:5px}
-}
-
-.login-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#052e16,#14532d);display:flex;align-items:center;justify-content:center;padding:20px}
-.login-card{width:min(420px,100%);background:#fff;border-radius:24px;padding:32px;box-shadow:0 25px 70px rgba(0,0,0,.28)}
-.login-logo{width:62px;height:62px;border-radius:50%;margin:0 auto 15px;background:linear-gradient(135deg,#14532d,#22c55e);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px}
-.login-card h2{text-align:center;color:#0f172a;margin-bottom:5px}
-.login-card>p{text-align:center;color:#64748b;font-size:14px;margin-bottom:22px}
-.login-card label{margin-top:12px}
-.login-error{display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:9px;padding:10px;font-size:13px;margin:12px 0}
-.bank-payment{margin:20px 0;padding:20px;border-radius:16px;background:#eff6ff;border:1px solid #bfdbfe}
-.bank-payment-title{font-weight:900;color:#1e3a8a;margin-bottom:12px}
-.bank-row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #dbeafe;font-size:14px}
-.bank-row:last-of-type{border-bottom:0}
-.bank-row span{color:#475569}.bank-row strong{color:#0f172a;text-align:right}
-.bank-note{font-size:12px;color:#475569;margin-top:12px;line-height:1.6}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14532d">
+  <title>Portal Pemutusan Mitra</title>
+  <style>
+    :root { color-scheme: light; --green:#15803d; --dark:#14532d; --muted:#64748b; }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; font-family:Arial,Helvetica,sans-serif;
+      background:linear-gradient(135deg,#f0fdf4,#ecfdf5 55%,#f8fafc);
+      color:#0f172a; display:flex; align-items:center; justify-content:center;
+      padding:20px;
+    }
+    .panel {
+      width:min(100%,440px); background:#fff; border:1px solid #dcfce7;
+      border-radius:22px; padding:30px 24px; box-shadow:0 18px 55px rgba(20,83,45,.12);
+      text-align:center;
+    }
+    .brand { color:var(--dark); font-size:13px; font-weight:700; letter-spacing:1.4px; margin-bottom:22px; }
+    h1 { margin:0 0 8px; font-size:25px; color:#0f172a; }
+    .sub { margin:0 0 22px; color:var(--muted); font-size:14px; }
+    label { display:block; text-align:left; font-size:13px; font-weight:700; margin:14px 0 6px; }
+    input {
+      width:100%; padding:13px 14px; border:1px solid #cbd5e1; border-radius:11px;
+      font-size:16px; outline:none; background:#fff;
+    }
+    input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(21,128,61,.12); }
+    button {
+      width:100%; margin-top:20px; border:0; border-radius:11px; padding:14px;
+      background:var(--green); color:#fff; font-size:16px; font-weight:700; cursor:pointer;
+    }
+    button:active { transform:translateY(1px); }
+    .error { min-height:20px; color:#b91c1c; font-size:13px; margin-top:12px; }
+    .status { display:none; }
+    .check {
+      width:112px; height:112px; border-radius:50%; margin:4px auto 24px;
+      display:grid; place-items:center; background:#dcfce7; border:7px solid #86efac;
+      color:#15803d; font-size:72px; font-weight:400; line-height:1;
+    }
+    .status h1 { color:#166534; font-size:26px; line-height:1.3; }
+    .waiting { margin:14px 0 0; font-size:19px; font-weight:700; color:#334155; }
+    .note { margin:18px 0 0; font-size:12px; color:#64748b; }
+    @media (max-width:380px) { .panel{padding:25px 18px} .status h1{font-size:22px} }
+  </style>
 </head>
-
 <body>
-<div id="loginScreen" class="login-screen">
- <div class="login-card">
-  <div class="login-logo">OKI</div>
-  <h2>Portal Yayasan OKI</h2>
-  <p>Silakan masuk untuk mengakses portal.</p>
-  <form id="loginForm">
-   <label for="loginUser">Username</label>
-   <input id="loginUser" type="text" autocomplete="username" placeholder="Username" required>
-   <label for="loginPass">Password</label>
-   <input id="loginPass" type="password" autocomplete="current-password" placeholder="Password" required>
-   <div id="loginError" class="login-error">Username atau password salah.</div>
-   <button type="submit" class="submit-btn">MASUK KE PORTAL</button>
-  </form>
- </div>
-</div>
+  <main class="panel">
+    <section id="login">
+      <div class="brand">PORTAL YAYASAN OKI</div>
+      <h1>Login Anggota</h1>
+      <p class="sub">Silakan masuk menggunakan akun Anda.</p>
+      <form id="loginForm" autocomplete="off">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="submit">Masuk ke Portal</button>
+        <div id="error" class="error" role="alert" aria-live="polite"></div>
+      </form>
+    </section>
 
-<main id="portalStatus" class="portal-status" aria-live="polite">
-  <div class="status-content">
-    <div class="status-check" aria-hidden="true">
-      <svg viewBox="0 0 100 100" role="img" aria-label="Tanda centang">
-        <circle cx="50" cy="50" r="44"></circle>
-        <path d="M28 51 L43 66 L73 35"></path>
-      </svg>
-    </div>
-    <h1>PEMUTUSAN MITRA SUKSES</h1>
-    <p>….menunggu pencairan…….</p>
-  </div>
-</main>
+    <section id="status" class="status" aria-live="polite">
+      <div class="check" aria-hidden="true">✓</div>
+      <h1>PEMUTUSAN MITRA SUKSES</h1>
+      <p class="waiting">….menunggu pencairan…….</p>
+      <p class="note">Status ini merupakan informasi pada portal.</p>
+    </section>
+  </main>
 
-<style>
-  body { background:#f8fafc; }
-  .portal-status {
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-    text-align:center;
-  }
-  .status-content { width:min(680px,100%); }
-  .status-check {
-    width:clamp(130px,30vw,190px);
-    height:clamp(130px,30vw,190px);
-    margin:0 auto 30px;
-  }
-  .status-check svg { width:100%;height:100%; }
-  .status-check circle {
-    fill:#16a34a;
-    stroke:#15803d;
-    stroke-width:3;
-  }
-  .status-check path {
-    fill:none;
-    stroke:#fff;
-    stroke-width:9;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-  }
-  .status-content h1 {
-    color:#14532d;
-    font-size:clamp(25px,5vw,42px);
-    line-height:1.2;
-    font-weight:900;
-    letter-spacing:.5px;
-    margin:0 0 14px;
-  }
-  .status-content p {
-    color:#166534;
-    font-size:clamp(18px,3.5vw,25px);
-    font-weight:800;
-    margin:0;
-  }
-</style>
+  <script>
+    (function () {
+      const form = document.getElementById('loginForm');
+      const login = document.getElementById('login');
+      const status = document.getElementById('status');
+      const error = document.getElementById('error');
 
-<script>
-let mode = "daftar";
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
 
-function pilihForm(jenis){
- mode = jenis;
-
- const tabDaftar = document.getElementById("tabDaftar");
- const tabPutus = document.getElementById("tabPutus");
- const heading = document.getElementById("formHeading");
- const description = document.getElementById("formDescription");
- const alasanGroup = document.getElementById("alasanGroup");
- const alasan = document.getElementById("alasan");
- const jaminanBox = document.getElementById("jaminanBox");
- const sudahBayar = document.getElementById("sudahBayar");
- const submitButton = document.getElementById("submitButton");
-
- if(jenis === "daftar"){
-  tabDaftar.classList.add("active");
-  tabPutus.classList.remove("active");
-  heading.textContent = "Form Pendaftaran Mitra Kerja";
-  description.textContent = "Silakan lengkapi seluruh data yang diperlukan.";
-  alasanGroup.style.display = "none";
-  alasan.required = false;
-  jaminanBox.style.display = "none";
-  sudahBayar.required = false;
-  submitButton.textContent = "KIRIM PENDAFTARAN";
- }else{
-  tabPutus.classList.add("active");
-  tabDaftar.classList.remove("active");
-  heading.textContent = "Form Pemutusan Hubungan Mitra";
-  description.textContent = "Lengkapi data, alasan pemutusan, dan ikuti ketentuan pembayaran.";
-  alasanGroup.style.display = "block";
-  alasan.required = true;
-  jaminanBox.style.display = "block";
-  sudahBayar.required = true;
-  submitButton.textContent = "KIRIM PENGAJUAN PEMUTUSAN";
- }
-}
-
-document.getElementById("mainForm").addEventListener("submit", function(e){
- e.preventDefault();
-
- const nik = document.getElementById("nik").value.trim();
- const file = document.getElementById("dokumen").files[0];
- const nama = document.getElementById("nama").value.trim();
- const hp = document.getElementById("hp").value.trim();
- const email = document.getElementById("email").value.trim();
- const pendidikan = document.getElementById("pendidikan").value;
- const bank = document.getElementById("bank").value;
- const rekening = document.getElementById("rekening").value.trim();
- const pemilik = document.getElementById("pemilikRekening").value.trim();
- const alasan = document.getElementById("alasan").value.trim();
-
- if(!/^\d{16}$/.test(nik)){ alert("NIK harus terdiri dari 16 digit angka."); return; }
- if(file){
-  if(file.type !== "application/pdf"){ alert("Dokumen harus dalam format PDF."); return; }
-  if(file.size > 5 * 1024 * 1024){ alert("Ukuran file PDF maksimal 5 MB."); return; }
- }
- if(mode === "putus" && !document.getElementById("sudahBayar").checked){
-  alert("Silakan baca ketentuan dan centang konfirmasi pembayaran terlebih dahulu.");
-  return;
- }
-
- const jenis = mode === "putus" ? "PEMUTUSAN HUBUNGAN MITRA" : "PENDAFTARAN MITRA KERJA";
- const subject = encodeURIComponent("YAYASAN OKI - " + jenis + " - " + nama);
- const body = encodeURIComponent(
-  "DATA PENGAJUAN YAYASAN OKI\n\n" +
-  "Jenis Pengajuan: " + jenis + "\n" +
-  "Nama: " + nama + "\n" +
-  "NIK: " + nik + "\n" +
-  "Nomor HP: " + hp + "\n" +
-  "Email: " + email + "\n" +
-  "Pendidikan: " + pendidikan + "\n" +
-  "Bank: " + bank + "\n" +
-  "Nomor Rekening: " + rekening + "\n" +
-  "Nama Pemilik Rekening: " + pemilik + "\n" +
-  (mode === "putus" ? "Alasan Pemutusan: " + alasan + "\n" : "") +
-  "\nDokumen PDF: " + (file ? file.name : "Tidak ada") +
-  "\n\nEmail dibuat dari Portal Yayasan OKI."
- );
-
- document.getElementById("successMessage").style.display = "block";
- window.location.href = "mailto:okiyayasan@gmail.com?subject=" + subject + "&body=" + body;
-});
-
-document.getElementById("payoutForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const name = document.getElementById("payoutName").value.trim();
-  const bank = document.getElementById("payoutBank").value;
-  const account = document.getElementById("payoutAccount").value.trim();
-  if(!name || !bank || !/^\d{5,30}$/.test(account)){
-    alert("Lengkapi nama, pilih bank, dan masukkan nomor rekening yang valid.");
-    return;
-  }
-  document.getElementById("payoutFormWrap").style.display = "none";
-  document.getElementById("payoutStatus").style.display = "block";
-});
-
-document.getElementById("payoutApprove").addEventListener("click", function(){
-  const agreed = document.getElementById("payoutTerms").checked;
-  if(!agreed){
-    alert("Centang persetujuan syarat dan ketentuan terlebih dahulu.");
-    return;
-  }
-  document.getElementById("payoutApproved").style.display = "block";
-  this.style.display = "none";
-  document.getElementById("payoutTerms").disabled = true;
-});
-
-document.getElementById("payoutAccount").addEventListener("input", function(){
-  this.value = this.value.replace(/\D/g, "").slice(0, 30);
-});
-
-document.getElementById("nik").addEventListener("input",function(){
- this.value = this.value.replace(/\D/g,"").slice(0,16);
-});
-
-document.getElementById("rekening").addEventListener("input",function(){
- this.value = this.value.replace(/\D/g,"");
-});
-
-document.querySelectorAll(".faq-question").forEach(function(button){
- button.addEventListener("click",function(){
-  this.parentElement.classList.toggle("open");
- });
-});
-
-document.getElementById("loginForm").addEventListener("submit", function(e){
- e.preventDefault();
- const username = document.getElementById("loginUser").value.trim();
- const password = document.getElementById("loginPass").value;
-
- if(username === "member958" && password === "nia231100"){
-  document.getElementById("loginScreen").style.display = "none";
-  sessionStorage.setItem("okiLogin","1");
- }else{
-  document.getElementById("loginError").style.display = "block";
- }
-});
-
-if(sessionStorage.getItem("okiLogin") === "1"){
- document.getElementById("loginScreen").style.display = "none";
-}
-
-</script>
+        if (username === 'member958' && password === 'nia231100') {
+          login.style.display = 'none';
+          status.style.display = 'block';
+        } else {
+          error.textContent = 'Username atau password tidak sesuai.';
+        }
+      });
+    }());
+  </script>
 </body>
 </html>
