@@ -409,179 +409,61 @@ footer li{margin:7px 0}
 </style>
 
 <script>
-let mode = "daftar";
+(function(){
+  const loginForm = document.getElementById('loginForm');
+  const loginScreen = document.getElementById('loginScreen');
+  const loginError = document.getElementById('loginError');
 
-function pilihForm(jenis){
- mode = jenis;
-
- const tabDaftar = document.getElementById("tabDaftar");
- const tabPutus = document.getElementById("tabPutus");
- const heading = document.getElementById("formHeading");
- const description = document.getElementById("formDescription");
- const alasanGroup = document.getElementById("alasanGroup");
- const alasan = document.getElementById("alasan");
- const jaminanBox = document.getElementById("jaminanBox");
- const sudahBayar = document.getElementById("sudahBayar");
- const submitButton = document.getElementById("submitButton");
-
- if(jenis === "daftar"){
-  tabDaftar.classList.add("active");
-  tabPutus.classList.remove("active");
-  heading.textContent = "Form Pendaftaran Mitra Kerja";
-  description.textContent = "Silakan lengkapi seluruh data yang diperlukan.";
-  alasanGroup.style.display = "none";
-  alasan.required = false;
-  jaminanBox.style.display = "none";
-  sudahBayar.required = false;
-  submitButton.textContent = "KIRIM PENDAFTARAN";
- }else{
-  tabPutus.classList.add("active");
-  tabDaftar.classList.remove("active");
-  heading.textContent = "Form Pemutusan Hubungan Mitra";
-  description.textContent = "Lengkapi data, alasan pemutusan, dan ikuti ketentuan pembayaran.";
-  alasanGroup.style.display = "block";
-  alasan.required = true;
-  jaminanBox.style.display = "block";
-  sudahBayar.required = true;
-  submitButton.textContent = "KIRIM PENGAJUAN PEMUTUSAN";
- }
-}
-
-document.getElementById("mainForm").addEventListener("submit", function(e){
- e.preventDefault();
-
- const nik = document.getElementById("nik").value.trim();
- const file = document.getElementById("dokumen").files[0];
- const nama = document.getElementById("nama").value.trim();
- const hp = document.getElementById("hp").value.trim();
- const email = document.getElementById("email").value.trim();
- const pendidikan = document.getElementById("pendidikan").value;
- const bank = document.getElementById("bank").value;
- const rekening = document.getElementById("rekening").value.trim();
- const pemilik = document.getElementById("pemilikRekening").value.trim();
- const alasan = document.getElementById("alasan").value.trim();
-
- if(!/^\d{16}$/.test(nik)){ alert("NIK harus terdiri dari 16 digit angka."); return; }
- if(file){
-  if(file.type !== "application/pdf"){ alert("Dokumen harus dalam format PDF."); return; }
-  if(file.size > 5 * 1024 * 1024){ alert("Ukuran file PDF maksimal 5 MB."); return; }
- }
- if(mode === "putus" && !document.getElementById("sudahBayar").checked){
-  alert("Silakan baca ketentuan dan centang konfirmasi pembayaran terlebih dahulu.");
-  return;
- }
-
- const jenis = mode === "putus" ? "PEMUTUSAN HUBUNGAN MITRA" : "PENDAFTARAN MITRA KERJA";
- const subject = encodeURIComponent("YAYASAN OKI - " + jenis + " - " + nama);
- const body = encodeURIComponent(
-  "DATA PENGAJUAN YAYASAN OKI\n\n" +
-  "Jenis Pengajuan: " + jenis + "\n" +
-  "Nama: " + nama + "\n" +
-  "NIK: " + nik + "\n" +
-  "Nomor HP: " + hp + "\n" +
-  "Email: " + email + "\n" +
-  "Pendidikan: " + pendidikan + "\n" +
-  "Bank: " + bank + "\n" +
-  "Nomor Rekening: " + rekening + "\n" +
-  "Nama Pemilik Rekening: " + pemilik + "\n" +
-  (mode === "putus" ? "Alasan Pemutusan: " + alasan + "\n" : "") +
-  "\nDokumen PDF: " + (file ? file.name : "Tidak ada") +
-  "\n\nEmail dibuat dari Portal Yayasan OKI."
- );
-
- document.getElementById("successMessage").style.display = "block";
- window.location.href = "mailto:okiyayasan@gmail.com?subject=" + subject + "&body=" + body;
-});
-
-document.getElementById("payoutForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const name = document.getElementById("payoutName").value.trim();
-  const bank = document.getElementById("payoutBank").value;
-  const account = document.getElementById("payoutAccount").value.trim();
-  if(!name || !bank || !/^\d{5,30}$/.test(account)){
-    alert("Lengkapi nama, pilih bank, dan masukkan nomor rekening yang valid.");
-    return;
+  if (loginForm && loginScreen) {
+    loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const username = document.getElementById('loginUser').value.trim();
+      const password = document.getElementById('loginPass').value;
+      if (username === 'member958' && password === 'nia231100') {
+        loginScreen.style.display = 'none';
+        try { sessionStorage.setItem('okiLogin', '1'); } catch (err) {}
+      } else if (loginError) {
+        loginError.style.display = 'block';
+      }
+    });
+    try {
+      if (sessionStorage.getItem('okiLogin') === '1') loginScreen.style.display = 'none';
+    } catch (err) {}
   }
-  document.getElementById("payoutFormWrap").style.display = "none";
-  document.getElementById("payoutStatus").style.display = "block";
-});
 
-document.getElementById("payoutApprove").addEventListener("click", function(){
-  const agreed = document.getElementById("payoutTerms").checked;
-  if(!agreed){
-    alert("Centang persetujuan syarat dan ketentuan terlebih dahulu.");
-    return;
+  const showButton = document.getElementById('showPayoutForm');
+  const payoutForm = document.getElementById('payoutRequestForm');
+  if (showButton && payoutForm) {
+    showButton.addEventListener('click', function(){
+      payoutForm.style.display = payoutForm.style.display === 'block' ? 'none' : 'block';
+      if (payoutForm.style.display === 'block') payoutForm.scrollIntoView({behavior:'smooth', block:'center'});
+    });
   }
-  document.getElementById("payoutApproved").style.display = "block";
-  this.style.display = "none";
-  document.getElementById("payoutTerms").disabled = true;
-});
 
-document.getElementById("payoutAccount").addEventListener("input", function(){
-  this.value = this.value.replace(/\D/g, "").slice(0, 30);
-});
+  const accountInput = document.getElementById('payoutAccountNumber');
+  if (accountInput) accountInput.addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g, '').slice(0, 30);
+  });
 
-document.getElementById("nik").addEventListener("input",function(){
- this.value = this.value.replace(/\D/g,"").slice(0,16);
-});
-
-document.getElementById("rekening").addEventListener("input",function(){
- this.value = this.value.replace(/\D/g,"");
-});
-
-document.querySelectorAll(".faq-question").forEach(function(button){
- button.addEventListener("click",function(){
-  this.parentElement.classList.toggle("open");
- });
-});
-
-
-document.getElementById("showPayoutForm").addEventListener("click", function(){
-  const form = document.getElementById("payoutRequestForm");
-  form.style.display = form.style.display === "block" ? "none" : "block";
-  if(form.style.display === "block") form.scrollIntoView({behavior:"smooth", block:"center"});
-});
-
-document.getElementById("payoutAccountNumber").addEventListener("input", function(){
-  this.value = this.value.replace(/\D/g, "").slice(0, 30);
-});
-
-document.getElementById("payoutRequestForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const name = document.getElementById("payoutFullName").value.trim();
-  const bank = document.getElementById("payoutBankName").value.trim();
-  const account = document.getElementById("payoutAccountNumber").value.trim();
-  const proof = document.getElementById("payoutProof").files[0];
-  if(!name || !bank || !/^\d{5,30}$/.test(account) || !proof){
-    alert("Lengkapi nama, bank, nomor rekening, dan lampirkan bukti transfer.");
-    return;
-  }
-  const result = document.getElementById("payoutRequestResult");
-  result.style.display = "block";
-  result.textContent = "Data telah diperiksa di halaman ini. Nama: " + name +
-    " | Bank: " + bank + " | Nomor rekening: " + account +
-    " | Bukti transfer: " + proof.name +
-    ". Data belum terkirim ke admin dan belum ada pencairan. Hubungi admin melalui kanal resmi untuk verifikasi.";
-});
-
-
-document.getElementById("loginForm").addEventListener("submit", function(e){
- e.preventDefault();
- const username = document.getElementById("loginUser").value.trim();
- const password = document.getElementById("loginPass").value;
-
- if(username === "member958" && password === "nia231100"){
-  document.getElementById("loginScreen").style.display = "none";
-  sessionStorage.setItem("okiLogin","1");
- }else{
-  document.getElementById("loginError").style.display = "block";
- }
-});
-
-if(sessionStorage.getItem("okiLogin") === "1"){
- document.getElementById("loginScreen").style.display = "none";
-}
-
+  if (payoutForm) payoutForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('payoutFullName').value.trim();
+    const bank = document.getElementById('payoutBankName').value.trim();
+    const account = document.getElementById('payoutAccountNumber').value.trim();
+    const proof = document.getElementById('payoutProof').files[0];
+    if (!name || !bank || !/^\d{5,30}$/.test(account) || !proof) {
+      alert('Lengkapi nama, bank, nomor rekening, dan lampirkan bukti transfer.');
+      return;
+    }
+    const result = document.getElementById('payoutRequestResult');
+    if (result) {
+      result.style.display = 'block';
+      result.textContent = 'Data formulir terisi. Nama: ' + name + ' | Bank: ' + bank +
+        ' | Nomor rekening: ' + account + ' | Bukti transfer: ' + proof.name +
+        '. Data belum terkirim ke admin; diperlukan kanal resmi untuk pengiriman dan verifikasi.';
+    }
+  });
+})();
 </script>
 </body>
 </html>
