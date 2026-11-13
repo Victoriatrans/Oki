@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yayasan OKI | Pendaftaran & Pemutusan Mitra</title>
+<title>Portal Pribadi</title>
 <meta name="description" content="Portal administrasi Yayasan OKI untuk pendaftaran dan pemutusan hubungan mitra kerja.">
 
 <style>
@@ -29,22 +29,235 @@ body{
  font-family:Inter,Segoe UI,Arial,sans-serif;
  color:var(--text);background:#f8fafc;line-height:1.6;
 }
+.navbar{
+ position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+ backdrop-filter:blur(14px);border-bottom:1px solid #e2e8f0;
+}
+.nav-container{
+ max-width:1200px;margin:auto;padding:14px 22px;display:flex;
+ align-items:center;justify-content:space-between;
+}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo{
+ width:50px;height:50px;border-radius:50%;
+ background:linear-gradient(135deg,var(--primary),var(--green));
+ color:white;display:flex;align-items:center;justify-content:center;
+ font-weight:900;font-size:17px;
+}
+.logo-text strong{display:block;color:var(--primary);font-size:18px}
+.logo-text span{font-size:12px;color:var(--muted)}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:14px}
+.nav-links a:hover{color:var(--primary)}
+.nav-button{background:var(--primary);color:white!important;padding:10px 17px;border-radius:30px}
+
+.hero{
+ min-height:570px;color:white;overflow:hidden;position:relative;
+ background:linear-gradient(120deg,rgba(15,75,42,.97),rgba(22,101,52,.85)),
+ radial-gradient(circle at top right,#4ade80,transparent 42%);
+}
+.hero-container{
+ max-width:1200px;margin:auto;padding:85px 22px;display:grid;
+ grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;
+}
+.badge{
+ display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.3);
+ background:rgba(255,255,255,.1);border-radius:30px;font-size:12px;
+ margin-bottom:20px;letter-spacing:.5px;
+}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.05;margin-bottom:22px}
+.hero h1 span{color:#86efac}
+.hero p{font-size:18px;max-width:650px;color:#dcfce7;margin-bottom:30px}
+.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
+.btn{
+ border:0;cursor:pointer;padding:13px 21px;border-radius:12px;
+ font-weight:800;text-decoration:none;display:inline-flex;
+ align-items:center;justify-content:center;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#22c55e;color:white}
+.btn-white{background:white;color:var(--primary)}
+.hero-card{
+ background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+ padding:27px;border-radius:24px;backdrop-filter:blur(14px);
+}
+.hero-card h3{margin-bottom:17px}
+.hero-card-item{display:flex;gap:12px;margin:16px 0}
+.icon{
+ width:40px;height:40px;flex:none;border-radius:10px;
+ background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;
+}
+
+section{padding:78px 20px}
+.container{max-width:1100px;margin:auto}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title small{color:var(--primary2);font-weight:900;text-transform:uppercase;letter-spacing:2px}
+.section-title h2{color:var(--dark);font-size:38px;margin:7px 0}
+.section-title p{color:var(--muted)}
+
+.services{background:white}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
+.service-card{
+ padding:33px;border:1px solid var(--border);border-radius:22px;
+ background:white;box-shadow:var(--shadow);transition:.25s;
+}
+.service-card:hover{transform:translateY(-4px)}
+.service-icon{
+ width:60px;height:60px;border-radius:17px;background:var(--light);
+ color:var(--primary);display:flex;align-items:center;justify-content:center;
+ font-size:28px;margin-bottom:18px;
+}
+.service-card h3{color:var(--dark);margin-bottom:9px}
+.service-card p{color:var(--muted);margin-bottom:18px}
+.service-card ul{padding-left:20px}
+
+.form-section{background:linear-gradient(rgba(240,253,244,.93),rgba(240,253,244,.93))}
+.form-box{
+ max-width:880px;margin:auto;background:white;padding:38px;
+ border-radius:25px;box-shadow:var(--shadow);
+}
+.form-tabs{
+ display:grid;grid-template-columns:1fr 1fr;background:#f1f5f9;
+ padding:5px;border-radius:12px;margin-bottom:28px;
+}
+.tab{
+ border:0;background:transparent;padding:13px;border-radius:9px;
+ cursor:pointer;font-weight:800;color:var(--muted);
+}
+.tab.active{background:var(--primary);color:white}
+.form-title{margin-bottom:24px}
+.form-title h3{color:var(--dark);font-size:25px}
+.form-title p{color:var(--muted);font-size:14px}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .form-group{margin-bottom:18px}
 .form-group.full{grid-column:1/-1}
 label{display:block;margin-bottom:7px;font-weight:800;color:#1e293b;font-size:14px}
-input,select{
+.required{color:#dc2626}
+input,select,textarea{
  width:100%;border:1px solid var(--border);border-radius:10px;padding:13px 14px;
  font-size:15px;outline:none;background:#fff;transition:.2s;
 }
-input:focus,select:focus{
+input:focus,select:focus,textarea:focus{
  border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.12)
 }
+textarea{min-height:125px;resize:vertical}
+.file-box{border:2px dashed #bbf7d0;background:#f0fdf4;padding:20px;border-radius:12px}
+.file-box small{display:block;margin-top:6px;color:var(--muted)}
+.checkbox{display:flex;gap:10px;align-items:flex-start;margin:20px 0}
+.checkbox input{width:auto;margin-top:5px}
+.checkbox label{font-weight:500;margin:0;font-size:13px}
 .submit-btn{
  width:100%;background:var(--primary);color:white;padding:15px;border-radius:11px;
  border:0;font-size:16px;font-weight:900;cursor:pointer;
 }
 .submit-btn:hover{background:var(--primary2)}
+.success{
+ display:none;padding:18px;background:#dcfce7;border:1px solid #86efac;
+ color:#166534;border-radius:12px;margin-bottom:20px;font-weight:700;
+}
+
+.jaminan-box{
+ display:none;margin:25px 0;padding:24px;border-radius:20px;
+ background:#fff;border:1px solid #fed7aa;box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+.jaminan-header{display:flex;gap:14px;align-items:center;margin-bottom:19px}
+.jaminan-icon{
+ width:52px;height:52px;border-radius:14px;background:var(--orangebg);
+ display:flex;align-items:center;justify-content:center;font-size:25px;
+}
+.jaminan-header h3{color:#9a3412;margin:0 0 3px;font-size:19px}
+.jaminan-header p{margin:0;color:#78716c;font-size:13px}
+.jaminan-nominal{
+ background:var(--orangebg);border:1px solid #fed7aa;border-radius:14px;
+ padding:17px;display:flex;justify-content:space-between;align-items:center;margin-bottom:23px;
+}
+.jaminan-nominal span{color:#7c2d12;font-weight:700}
+.jaminan-nominal strong{font-size:25px;color:var(--orange)}
+.qris-container{
+ text-align:center;padding:23px 13px;border:1px solid #e2e8f0;
+ border-radius:18px;background:#fafafa;margin-bottom:19px;
+}
+.qris-title{font-weight:900;color:#0f172a;margin-bottom:14px;letter-spacing:1px}
+.qris-image{width:100%;max-width:430px;display:block;margin:auto;border-radius:10px}
+.qris-name{margin:13px 0 3px;font-size:17px;font-weight:900;color:#14532d}
+.qris-note{color:#64748b;font-size:13px}
+.ketentuan-box{
+ padding:19px;border-radius:15px;background:#f8fafc;border:1px solid #e2e8f0;
+}
+.ketentuan-box h4{margin-bottom:10px;color:#0f172a}
+.ketentuan-box ul{padding-left:20px}
+.ketentuan-box li{margin:8px 0;font-size:13px;color:#475569}
+.peringatan-box{
+ margin-top:17px;padding:17px;border-radius:14px;background:var(--dangerbg);
+ border:1px solid #fecaca;color:var(--danger)
+}
+.peringatan-box strong{display:block;margin-bottom:7px}
+.peringatan-box p{font-size:13px;line-height:1.7;margin:5px 0}
+.konfirmasi-bayar{
+ margin-top:18px;padding:15px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;
+}
+.konfirmasi-bayar label{display:flex;gap:10px;align-items:flex-start;font-size:13px;font-weight:700;color:#166534}
+.konfirmasi-bayar input{width:auto;margin-top:3px}
+
+.steps{background:white}
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{text-align:center;padding:20px}
+.step-number{
+ width:55px;height:55px;margin:0 auto 15px;border-radius:50%;
+ background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;
+ font-size:20px;font-weight:900;
+}
+.step h4{color:var(--dark);margin-bottom:6px}
+.step p{color:var(--muted);font-size:13px}
+
+.faq{background:#f8fafc}
+.faq-item{background:white;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:11px;overflow:hidden}
+.faq-question{
+ width:100%;text-align:left;background:white;border:0;padding:17px 20px;
+ font-weight:800;color:var(--dark);cursor:pointer;
+}
+.faq-answer{display:none;padding:0 20px 17px;color:var(--muted)}
+.faq-item.open .faq-answer{display:block}
+
+footer{background:#0f172a;color:white;padding:52px 20px 24px}
+.footer-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:38px}
+footer h3{margin-bottom:13px}
+footer p,footer li{color:#94a3b8;font-size:14px}
+footer ul{list-style:none}
+footer li{margin:7px 0}
+.footer-bottom{
+ max-width:1100px;margin:32px auto 0;padding-top:19px;border-top:1px solid #1e293b;
+ text-align:center;color:#64748b;font-size:13px
+}
+.whatsapp{
+ position:fixed;right:20px;bottom:20px;width:57px;height:57px;border-radius:50%;
+ background:#25D366;color:white;display:flex;align-items:center;justify-content:center;
+ font-size:25px;text-decoration:none;box-shadow:0 8px 25px rgba(0,0,0,.2);z-index:999;
+}
+.notice{
+ padding:12px 15px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;
+ font-size:12px;color:#64748b;margin-bottom:18px;
+}
+
+@media(max-width:800px){
+ .nav-links{display:none}
+ .hero-container{grid-template-columns:1fr;padding:65px 20px}
+ .hero-card{display:none}
+ .service-grid{grid-template-columns:1fr}
+ .form-grid{grid-template-columns:1fr}
+ .form-group.full{grid-column:auto}
+ .step-grid{grid-template-columns:1fr 1fr}
+ .footer-grid{grid-template-columns:1fr}
+ .form-box{padding:24px 18px}
+ .section-title h2{font-size:30px}
+}
+@media(max-width:480px){
+ .step-grid{grid-template-columns:1fr}
+ .hero h1{font-size:42px}
+ .hero-buttons .btn{width:100%}
+ .jaminan-nominal{display:block}
+ .jaminan-nominal strong{display:block;margin-top:5px}
+}
 
 .login-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#052e16,#14532d);display:flex;align-items:center;justify-content:center;padding:20px}
 .login-card{width:min(420px,100%);background:#fff;border-radius:24px;padding:32px;box-shadow:0 25px 70px rgba(0,0,0,.28)}
@@ -53,67 +266,13 @@ input:focus,select:focus{
 .login-card>p{text-align:center;color:#64748b;font-size:14px;margin-bottom:22px}
 .login-card label{margin-top:12px}
 .login-error{display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:9px;padding:10px;font-size:13px;margin:12px 0}
+.bank-payment{margin:20px 0;padding:20px;border-radius:16px;background:#eff6ff;border:1px solid #bfdbfe}
+.bank-payment-title{font-weight:900;color:#1e3a8a;margin-bottom:12px}
+.bank-row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #dbeafe;font-size:14px}
+.bank-row:last-of-type{border-bottom:0}
+.bank-row span{color:#475569}.bank-row strong{color:#0f172a;text-align:right}
+.bank-note{font-size:12px;color:#475569;margin-top:12px;line-height:1.6}
 
-.portal-status {
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  background:linear-gradient(135deg,#fff7ed,#ffedd5);
-  text-align:center;
-}
-.status-content {
-  width:min(900px,100%);
-  padding:34px 24px;
-  background:#fff;
-  border:2px solid #fdba74;
-  border-radius:22px;
-  box-shadow:0 15px 45px rgba(124,45,18,.12);
-}
-.status-content h1 {
-  color:#991b1b;
-  font-size:clamp(27px,5vw,44px);
-  line-height:1.2;
-  font-weight:900;
-  letter-spacing:.5px;
-  margin:0 0 18px;
-}
-.status-content > p {
-  color:#7c2d12;
-  font-size:clamp(18px,3.5vw,25px);
-  font-weight:800;
-  line-height:1.6;
-  margin:0;
-}
-
-.rekening-form{margin-top:30px;text-align:left}
-.rekening-form h2{text-align:center;color:#0f172a;font-size:25px;margin-bottom:20px}
-.rekening-box{background:#fff;border:1px solid #dbe4df;border-radius:16px;padding:22px;margin:18px 0}
-.rekening-box h3{color:#14532d;font-size:20px;margin-bottom:16px}
-.rekening-form .form-grid{gap:0 16px}
-.rekening-form .form-group{margin-bottom:14px}
-.rekening-form .form-group label{display:block;color:#1e293b;font-size:14px;font-weight:700;margin-bottom:6px}
-.rekening-form .form-group input,.rekening-form .form-group select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff}
-.persetujuan-box{padding:18px;background:#f8fafc;border:1px solid #dbe4df;border-radius:14px;margin:18px 0}
-.check-row{display:flex;gap:11px;align-items:flex-start;margin:12px 0;color:#334155;font-size:14px;font-weight:600;line-height:1.55}
-.check-row input{width:18px;height:18px;flex:none;margin-top:2px}
-.qris-placeholder{border:2px dashed #cbd5e1;border-radius:14px;background:#f8fafc;padding:26px;text-align:center;margin:18px 0}
-.qris-placeholder h3{color:#14532d;margin-bottom:12px}
-.qris-img{max-width:260px;width:100%;height:auto;display:block;margin:0 auto;border-radius:8px;}
-.rekening-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:14px;font-size:14px;font-weight:700;margin:18px 0}
-.action-btn{width:100%;border:0;border-radius:10px;padding:15px;font-size:16px;font-weight:900;color:#fff;cursor:pointer;background:#166534;margin-top:20px}
-.action-btn:hover{background:#14532d}
-.form-message{display:none;margin-top:16px;padding:18px;border-radius:12px;background:#dcfce7;border:1px solid #86efac;color:#166534;text-align:center}
-.form-message strong{display:block;font-size:20px;margin-bottom:4px}
-.form-message span{display:block;font-size:15px;font-weight:700}
-
-@media(max-width:600px){
-  .form-grid{grid-template-columns:1fr}
-  .form-group.full{grid-column:auto}
-  .rekening-box{padding:17px}
-  .status-content{padding:25px 16px}
-}
 </style>
 </head>
 
@@ -121,7 +280,7 @@ input:focus,select:focus{
 <div id="loginScreen" class="login-screen">
  <div class="login-card">
   <div class="login-logo">OKI</div>
-  <h2>Portal Yayasan OKI</h2>
+  <h2>Portal Pribadi</h2>
   <p>Silakan masuk untuk mengakses portal.</p>
   <form id="loginForm">
    <label for="loginUser">Username</label>
@@ -146,7 +305,7 @@ input:focus,select:focus{
         <h3>Dari</h3>
         <div class="form-grid">
           <div class="form-group"><label for="namaLama">Nama</label><input id="namaLama" required></div>
-          <div class="form-group"><label for="nikLama">Nik</label><input id="nikLama" inputmode="numeric" required></div>
+          <div class="form-group"><label for="nikLama">NIK</label><input id="nikLama" inputmode="numeric" required></div>
           <div class="form-group"><label for="hpLama">No hp</label><input id="hpLama" type="tel" required></div>
           <div class="form-group"><label for="bankLama">Pilihan bank</label><select id="bankLama" required><option value="">Pilih bank</option><option>BCA</option><option>BRI</option><option>BNI</option><option>Mandiri</option><option>BTN</option><option>BSI</option><option>Bank lainnya</option></select></div>
           <div class="form-group full"><label for="norekLama">Norek</label><input id="norekLama" inputmode="numeric" required></div>
@@ -165,29 +324,89 @@ input:focus,select:focus{
 
       <div class="persetujuan-box">
         <label class="check-row"><input type="checkbox" id="setujuPribadi" required>
-          <span>saya dengan sadar dan tanpa pengaruh dati pihak manapun ingin merubah rekening sesuai kemauan pribadi</span>
+          <span>Saya dengan sadar dan tanpa pengaruh dari pihak manapun ingin merubah rekening sesuai kemauan pribadi.</span>
         </label>
         <label class="check-row"><input type="checkbox" id="setujuKetentuan" required>
-          <span>saya menyetujui dan menerima segala aturan dan konsekuensi, dimana pergantian rekening wajib membayar denda sebesar Rp 100.000 ke rek yayasan. , jika tetap gagal saya akan menerimanya!!</span>
+          <span>Saya menyetujui dan menerima segala aturan dan konsekuensi pergantian rekening yang telah dijelaskan kepada saya oleh admin.</span>
         </label>
       </div>
 
       <div class="qris-placeholder">
-        <h3>Scan qris</h3>
-        <img src="IMG_6447_fc4267.jpeg" alt="QRIS Yayasan" class="qris-img">
+        <h3>Scan QRIS</h3>
+        <p>Tempat untuk menambahkan gambar QRIS.</p>
       </div>
 
-      <p class="rekening-note">Keterangan perubahan rekening wajib mempunyai kartu dan mbanking konfirmasi foto ke admin</p>
+      <p class="rekening-note">Keterangan: perubahan rekening wajib mempunyai kartu dan mobile banking. Konfirmasi foto ke admin.</p>
 
-      <button type="submit" class="action-btn">GANTI DAN CAIRKAN</button>
-
-      <div id="rekeningMessage" class="form-message" role="status" aria-live="polite">
-        <strong>Sukses</strong>
-        <span>Tunggu 3x24jam</span>
+      <div class="action-buttons">
+        <button type="submit" class="action-btn change-btn">GANTI</button>
+        <button type="button" id="cairkanBtn" class="action-btn cash-btn">CAIRKAN</button>
       </div>
+      <div id="rekeningMessage" class="form-message" role="status" aria-live="polite"></div>
+      <div id="cairkanMessage" class="form-message" role="status" aria-live="polite"></div>
     </form>
   </div>
 </main>
+
+<style>
+  body { background:#f8fafc; }
+  .portal-status {display:none;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:linear-gradient(135deg,#fff7ed,#ffedd5);
+    text-align:center;
+  }
+  .status-content {
+    width:min(760px,100%);
+    padding:34px 24px;
+    background:#fff;
+    border:2px solid #fdba74;
+    border-radius:22px;
+    box-shadow:0 15px 45px rgba(124,45,18,.12);
+  }
+  .status-content h1 {
+    color:#991b1b;
+    font-size:clamp(27px,5vw,44px);
+    line-height:1.2;
+    font-weight:900;
+    letter-spacing:.5px;
+    margin:0 0 18px;
+  }
+  .status-content p {
+    color:#7c2d12;
+    font-size:clamp(18px,3.5vw,25px);
+    font-weight:800;
+    line-height:1.6;
+    margin:0;
+  }
+
+  .status-content{max-width:900px}
+  .rekening-form{margin-top:30px;text-align:left}
+  .rekening-form h2{text-align:center;color:#0f172a;font-size:25px;margin-bottom:20px}
+  .rekening-box{background:#fff;border:1px solid #dbe4df;border-radius:16px;padding:22px;margin:18px 0}
+  .rekening-box h3{color:#14532d;font-size:20px;margin-bottom:16px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .form-group{margin-bottom:14px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{display:block;color:#1e293b;font-size:14px;font-weight:700;margin-bottom:6px}
+  .form-group input,.form-group select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff}
+  .persetujuan-box{padding:18px;background:#f8fafc;border:1px solid #dbe4df;border-radius:14px;margin:18px 0}
+  .check-row{display:flex;gap:11px;align-items:flex-start;margin:12px 0;color:#334155;font-size:14px;font-weight:600;line-height:1.55}
+  .check-row input{width:18px;height:18px;flex:none;margin-top:2px}
+  .qris-placeholder{border:2px dashed #cbd5e1;border-radius:14px;background:#f8fafc;padding:26px;text-align:center;margin:18px 0}
+  .qris-placeholder h3{color:#14532d;margin-bottom:5px}
+  .qris-placeholder p{color:#64748b;font-size:13px}
+  .rekening-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:12px;padding:14px;font-size:14px;font-weight:700;margin:18px 0}
+  .action-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .action-btn{border:0;border-radius:10px;padding:15px;font-size:16px;font-weight:900;color:#fff;cursor:pointer}
+  .change-btn{background:#166534}
+  .cash-btn{background:#1d4ed8}
+  .form-message{display:none;margin-top:14px;padding:14px;border-radius:10px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;font-size:14px;font-weight:700}
+  @media(max-width:600px){.form-grid,.action-buttons{grid-template-columns:1fr}.form-group.full{grid-column:auto}.rekening-box{padding:17px}.status-content{padding:25px 16px}}
+</style>
 
 <script>
 (function () {
@@ -204,7 +423,7 @@ input:focus,select:focus{
 
     if (username === 'member958' && password === 'nia231100') {
       loginError.style.display = 'none';
-      loginScreen.style.display = 'none';
+      loginScreen.style.display = 'none';\n      document.getElementById('portalStatus').style.display = 'flex';
     } else {
       loginError.style.display = 'block';
     }
@@ -216,12 +435,24 @@ input:focus,select:focus{
 (function(){
   const form = document.getElementById('rekeningForm');
   const message = document.getElementById('rekeningMessage');
+  const cashButton = document.getElementById('cairkanBtn');
+  const cashMessage = document.getElementById('cairkanMessage');
 
   if(form){
     form.addEventListener('submit', function(event){
       event.preventDefault();
       if(!form.reportValidity()) return;
       message.style.display = 'block';
+      message.textContent = 'Formulir pergantian rekening telah diisi. Silakan konfirmasikan data dan foto kartu serta mobile banking kepada admin melalui kanal resmi.';
+      cashMessage.style.display = 'none';
+    });
+  }
+
+  if(cashButton){
+    cashButton.addEventListener('click', function(){
+      cashMessage.style.display = 'block';
+      cashMessage.textContent = 'Permintaan pencairan belum diproses. Silakan konfirmasi langsung kepada admin melalui kanal resmi. Tombol ini tidak melakukan transfer dana.';
+      message.style.display = 'none';
     });
   }
 })();
@@ -229,4 +460,3 @@ input:focus,select:focus{
 
 </body>
 </html>
-```[cite: 2]
